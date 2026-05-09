@@ -27,6 +27,9 @@ I am transitioning into cloud operations and cloud security, and this project is
 ## Current Status
 In progress.
 
+## Study Documentation
+- [CloudOps Master Map](docs/cloudops-master-map.md)
+
 ## Roadmap
 - [ ] Create architecture diagram
 - [ ] Build EC2 monitoring lab
