@@ -29,6 +29,13 @@ In progress.
 
 ## Study Documentation
 - [CloudOps Master Map](docs/cloudops-master-map.md)
+- [Mistake Log](docs/mistake-log.md)
+- [Interview Drill Log](docs/interview-drill-log.md)
+
+## Templates
+- [CloudOps Packet Template](docs/templates/cloudops-packet-template.md)
+- [AWS Lab Template](docs/templates/aws-lab-template.md)
+- [Runbook Template](docs/templates/runbook-template.md)
 
 ## Roadmap
 - [ ] Create architecture diagram
