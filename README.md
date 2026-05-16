@@ -27,6 +27,10 @@ I am transitioning into cloud operations and cloud security, and this project is
 ## Current Status
 In progress.
 
+## Architecture
+
+- [AWS CloudOps Security Lab Architecture Diagram v1](diagrams/aws-cloudops-security-lab-v1.md)
+
 ## Study Documentation
 - [CloudOps Master Map](docs/cloudops-master-map.md)
 - [Mistake Log](docs/mistake-log.md)
@@ -38,7 +42,7 @@ In progress.
 - [Runbook Template](docs/templates/runbook-template.md)
 
 ## Roadmap
-- [ ] Create architecture diagram
+- [x] Create architecture diagram
 - [ ] Build EC2 monitoring lab
 - [ ] Configure CloudWatch alarms
 - [ ] Enable and review CloudTrail logs
