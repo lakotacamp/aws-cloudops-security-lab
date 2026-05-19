@@ -31,10 +31,11 @@ In progress.
 
 - [AWS CloudOps Security Lab Architecture Diagram v1](diagrams/aws-cloudops-security-lab-v1.md)
 
-## Study Documentation
+## Project Documentation
+
 - [CloudOps Master Map](docs/cloudops-master-map.md)
-- [Mistake Log](docs/mistake-log.md)
-- [Interview Drill Log](docs/interview-drill-log.md)
+- [AWS Lab Template](docs/templates/aws-lab-template.md)
+- [Runbook Template](docs/templates/runbook-template.md)
 
 ## Templates
 - [CloudOps Packet Template](docs/templates/cloudops-packet-template.md)

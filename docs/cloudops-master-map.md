@@ -1,7 +1,9 @@
 # CloudOps Master Map
 
 ## Purpose
-This document is my high-level map of AWS Cloud Operations concepts. I will update it as I study for the AWS CloudOps Engineer certification and build hands-on labs.
+This document maps the AWS CloudOps concepts covered by this portfolio project.
+
+It connects core CloudOps domains to hands-on labs, runbooks, architecture diagrams, monitoring workflows, security documentation, and troubleshooting scenarios.
 
 ---
 
@@ -137,11 +139,26 @@ How do I detect, investigate, and reduce security risk?
 
 ---
 
-## Study Notes
-Add new notes here as concepts become clearer.
+## Portfolio Build Priorities
 
-## Confusing Topics
-Add confusing topics here so they can be reviewed later.
+This project will turn the map above into hands-on AWS CloudOps artifacts, including:
 
-## Exam Patterns
-Add common exam patterns here as they appear in practice questions.
+- monitoring labs
+- logging and audit labs
+- IAM and least-privilege documentation
+- troubleshooting runbooks
+- architecture diagrams
+- screenshots and evidence
+- security and cleanup notes
+
+## Future Expansion Areas
+
+Planned areas for future portfolio work:
+
+- CloudWatch alarm and metrics labs
+- CloudWatch Logs and metric filter labs
+- CloudTrail investigation lab
+- Systems Manager operational access lab
+- IAM role and policy review notes
+- VPC and security group troubleshooting scenarios
+- S3 log storage and evidence organization
