@@ -37,11 +37,6 @@ In progress.
 - [AWS Lab Template](docs/templates/aws-lab-template.md)
 - [Runbook Template](docs/templates/runbook-template.md)
 
-## Templates
-- [CloudOps Packet Template](docs/templates/cloudops-packet-template.md)
-- [AWS Lab Template](docs/templates/aws-lab-template.md)
-- [Runbook Template](docs/templates/runbook-template.md)
-
 ## Roadmap
 - [x] Create architecture diagram
 - [ ] Build EC2 monitoring lab

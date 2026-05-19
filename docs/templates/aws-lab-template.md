@@ -27,7 +27,7 @@ Add screenshot filenames or links here.
 ## What Worked
 - 
 
-## What Broke / Confused Me
+## Issues Encountered / Troubleshooting Evidence
 - 
 
 ## Troubleshooting Notes
