@@ -1,32 +1,27 @@
-# aws-cloudops-security-lab
-It occurs to me I should actually put some of these labs on display if I want a job! AWS Cloud Operations and Security portfolio lab for monitoring, IAM, logging, troubleshooting, and incident response practice project.
+# AWS CloudOps Security Lab
 
-## Why I Built This
-I am transitioning into cloud operations and cloud security, and this project is intended to show hands-on ability with real AWS operational workflows.
+Employer-facing AWS cloud operations and security portfolio repository focused on monitoring, IAM, logging, EC2 troubleshooting, incident response runbooks, and technical documentation.
+
+## Purpose
+
+This repository documents my hands-on training and project work as I transition from mission-critical surgical technology support into AWS cloud operations and cybersecurity.
+
+The current focus is building clear, professional artifacts that demonstrate operational thinking, troubleshooting process, security fundamentals, and documentation quality.
 
 ## Skills Demonstrated
-- AWS cloud operations
-- IAM and least privilege
-- CloudWatch monitoring
-- CloudTrail logging
+
+- AWS cloud operations fundamentals
 - EC2 troubleshooting
-- Security documentation
+- CloudWatch monitoring and alarms
+- CloudTrail logging and audit concepts
+- IAM roles, policies, and least privilege
 - Incident response runbooks
 - Technical documentation
-
-## AWS Services Planned
-- EC2
-- IAM
-- CloudWatch
-- CloudTrail
-- S3
-- Systems Manager
-- EventBridge
-- Lambda
+- Security-focused operational thinking
 
 ## Current Status
-In progress.
 
+In progress. Current artifacts are being developed and polished into employer-facing documentation.
 ## Architecture
 
 - [AWS CloudOps Security Lab Architecture Diagram v1](diagrams/aws-cloudops-security-lab-v1.md)
