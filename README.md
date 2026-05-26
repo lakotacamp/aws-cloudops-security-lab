@@ -35,14 +35,34 @@ In progress. Current artifacts are being developed and polished into employer-fa
 - [Runbook Template](docs/operations/templates/runbook-template.md)
 
 ## Roadmap
-- [x] Create architecture diagram
-- [ ] Build EC2 monitoring lab
-- [ ] Configure CloudWatch alarms
-- [ ] Enable and review CloudTrail logs
-- [ ] Create IAM role documentation
-- [ ] Write EC2 SSH troubleshooting runbook
-- [ ] Add screenshots
-- [ ] Add lessons learned
+
+### MVP Foundation
+
+- [x] Create first architecture diagram
+- [x] Create public project vision document
+- [x] Reorganize documentation structure for the Colony Simulator Ops Showcase
+- [ ] Define MVP roadmap
+- [ ] Create MVP architecture document
+- [ ] Create first deployable frontend shell
+
+### Application Build
+
+- [ ] Build initial colony landing page
+- [ ] Add seeded colony state view
+- [ ] Add basic “Advance Day” interaction
+- [ ] Add placeholder or generated journal entry
+- [ ] Add basic Ops Dashboard page
+
+### CloudOps / Security Capabilities
+
+- [ ] Add first CloudWatch monitoring capability
+- [ ] Add CloudTrail audit documentation
+- [ ] Add IAM least-privilege decision record
+- [ ] Add incident response runbook
+- [ ] Add safe incident simulation design
+- [ ] Add screenshots and operational evidence
+
+## Runbooks
 
 - [EC2 SSH Troubleshooting Runbook](docs/operations/runbooks/ec2-ssh-troubleshooting.md)
 
