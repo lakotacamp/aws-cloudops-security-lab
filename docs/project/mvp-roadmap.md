@@ -116,7 +116,7 @@ Deliverables:
 - [x] Project vision document
 - [x] Documentation folder reorganization
 - [x] README roadmap update
-- [ ] MVP roadmap document
+- [x] MVP roadmap document
 - [ ] MVP architecture document
 - [ ] Initial GitHub issue backlog
 
@@ -160,12 +160,12 @@ This should use local/static data first so the frontend is easy to understand be
 
 Deliverables:
 
- Create a seeded colony data object
- Display colony name, location, population, morale, food, tools, and risk level
- Display 5–10 founding colonists
- Display one starter journal entry
- Add a simple “Advance Day” button
- Make the button update visible state locally
+- [ ] Create a seeded colony data object
+- [ ] Display colony name, location, population, morale, food, tools, and risk level
+- [ ] Display 5–10 founding colonists
+- [ ] Display one starter journal entry
+- [ ] Add a simple “Advance Day” button
+- [ ] Make the button update visible state locally
 
 Definition of done:
 
@@ -174,6 +174,8 @@ A visitor can see a small colony and click an interaction that changes something
 Important design rule:
 
 Use structured state for the simulation. AI narration comes later.
+
+---
 
 ## Phase 3 — Local Simulation Engine
 
@@ -185,25 +187,28 @@ The point is not to build a full game engine. The point is to show that colony s
 
 Deliverables:
 
- Add a simple turn/day counter
- Add food consumption
- Add morale change
- Add weather or event modifier
- Add risk level update
- Generate a simple non-AI journal entry from state changes
- Add basic tests or manual test notes if appropriate
+- [ ] Add a simple turn/day counter
+- [ ] Add food consumption
+- [ ] Add morale change
+- [ ] Add weather or event modifier
+- [ ] Add risk level update
+- [ ] Generate a simple non-AI journal entry from state changes
+- [ ] Add basic tests or manual test notes if appropriate
 
 Definition of done:
 
-Clicking Advance Day changes state in a way that can be explained and debugged.
+Clicking **Advance Day** changes state in a way that can be explained and debugged.
 
 Example rule:
 
 Each day:
-- food decreases based on population
-- morale changes based on food level and event pressure
-- risk changes based on weather/event conditions
-- journal text summarizes the result
+
+- Food decreases based on population.
+- Morale changes based on food level and event pressure.
+- Risk changes based on weather/event conditions.
+- Journal text summarizes the result.
+
+---
 
 ## Phase 4 — Basic Ops Dashboard Page
 
@@ -215,17 +220,19 @@ At this stage, the dashboard can use mock/local data. It should show what will e
 
 Deliverables:
 
- Add Ops Dashboard page
- Add service health panel
- Add Advance Day success/failure panel
- Add latency/status placeholder
- Add incident history placeholder
- Add security posture checklist placeholder
- Add “Simulate Incident” disabled or mock button
+- [ ] Add Ops Dashboard page
+- [ ] Add service health panel
+- [ ] Add Advance Day success/failure panel
+- [ ] Add latency/status placeholder
+- [ ] Add incident history placeholder
+- [ ] Add security posture checklist placeholder
+- [ ] Add “Simulate Incident” disabled or mock button
 
 Definition of done:
 
 The dashboard communicates the professional purpose of the project even before AWS telemetry is connected.
+
+---
 
 ## Phase 5 — First AWS-Backed Feature
 
@@ -235,23 +242,25 @@ Connect the project to the first real AWS-backed capability.
 
 Recommended first real feature:
 
-API Gateway + Lambda hello/status endpoint
+**API Gateway + Lambda hello/status endpoint**
 
 Deliverables:
 
- Create backend folder
- Create simple Lambda function
- Expose function through API Gateway
- Connect frontend to status endpoint
- Display backend status on Ops Dashboard
- Log backend request in CloudWatch
- Document the architecture update
+- [ ] Create backend folder
+- [ ] Create simple Lambda function
+- [ ] Expose function through API Gateway
+- [ ] Connect frontend to status endpoint
+- [ ] Display backend status on Ops Dashboard
+- [ ] Log backend request in CloudWatch
+- [ ] Document the architecture update
 
 Definition of done:
 
 The frontend calls a real AWS backend endpoint and displays the result.
 
 This is the first major transition from static project to cloud-backed project.
+
+---
 
 ## Phase 6 — Persistent Colony State
 
@@ -261,16 +270,18 @@ Move colony state from local/frontend-only state into DynamoDB.
 
 Deliverables:
 
- Create DynamoDB table design
- Add colony state save/load endpoint
- Store seeded colony state
- Store turn history
- Display saved state in frontend
- Add cost/control notes
+- [ ] Create DynamoDB table design
+- [ ] Add colony state save/load endpoint
+- [ ] Store seeded colony state
+- [ ] Store turn history
+- [ ] Display saved state in frontend
+- [ ] Add cost-control notes
 
 Definition of done:
 
 The colony state is stored in AWS and can be loaded through the application.
+
+---
 
 ## Phase 7 — AI Journal Narration
 
@@ -284,17 +295,19 @@ Code runs the simulation. The model narrates the result.
 
 Deliverables:
 
- Create structured simulation summary
- Add prompt template
- Call AI model through backend
- Store generated journal entry
- Add fallback behavior if AI call fails
- Log invocation success/failure
- Add cost and safety notes
+- [ ] Create structured simulation summary
+- [ ] Add prompt template
+- [ ] Call AI model through backend
+- [ ] Store generated journal entry
+- [ ] Add fallback behavior if AI call fails
+- [ ] Log invocation success/failure
+- [ ] Add cost and safety notes
 
 Definition of done:
 
 The journal entry is generated from structured colony state and stored as part of turn history.
+
+---
 
 ## Phase 8 — Observability and Ops Dashboard Integration
 
@@ -304,17 +317,19 @@ Connect the Ops Dashboard to real operational signals.
 
 Deliverables:
 
- Add structured backend logs
- Add custom metrics for Advance Day success/failure
- Add latency metric
- Add CloudWatch dashboard or dashboard-backed notes
- Add CloudWatch alarm
- Add SNS notification path
- Display selected operational state in Ops Dashboard
+- [ ] Add structured backend logs
+- [ ] Add custom metrics for Advance Day success/failure
+- [ ] Add latency metric
+- [ ] Add CloudWatch dashboard or dashboard-backed notes
+- [ ] Add CloudWatch alarm
+- [ ] Add SNS notification path
+- [ ] Display selected operational state in Ops Dashboard
 
 Definition of done:
 
 The Ops Dashboard shows real operational evidence, not just mock data.
+
+---
 
 ## Phase 9 — Safe Incident Simulation
 
@@ -324,21 +339,23 @@ Add a controlled incident simulation that demonstrates CloudOps thinking without
 
 Recommended first incident:
 
-Simulate elevated Advance Day latency or forced application-level failure.
+**Simulate elevated Advance Day latency or forced application-level failure.**
 
 Deliverables:
 
- Add failure-mode flag
- Add controlled simulated delay or failure
- Log the incident event
- Update dashboard incident history
- Trigger or document alarm behavior
- Add incident response runbook
- Add recovery/reset behavior
+- [ ] Add failure-mode flag
+- [ ] Add controlled simulated delay or failure
+- [ ] Log the incident event
+- [ ] Update dashboard incident history
+- [ ] Trigger or document alarm behavior
+- [ ] Add incident response runbook
+- [ ] Add recovery/reset behavior
 
 Definition of done:
 
 A visitor can understand how the system detects, displays, and recovers from a safe simulated incident.
+
+---
 
 ## Phase 10 — Portfolio Website Integration
 
@@ -348,65 +365,67 @@ Make the project easy to show on a portfolio website and LinkedIn.
 
 Deliverables:
 
- Create portfolio project card
- Add links to:
-Live Colony Demo
-Ops Dashboard
-GitHub Repo
-Architecture Docs
-Runbooks
- Add short project description
- Add screenshots or short GIF/video
- Add “What this demonstrates” section
- Add LinkedIn-safe project summary
+- [ ] Create portfolio project card
+- [ ] Add link to the Live Colony Demo
+- [ ] Add link to the Ops Dashboard
+- [ ] Add link to the GitHub repo
+- [ ] Add link to the architecture docs
+- [ ] Add link to the runbooks
+- [ ] Add short project description
+- [ ] Add screenshots or short GIF/video
+- [ ] Add “What this demonstrates” section
+- [ ] Add LinkedIn-safe project summary
 
 Definition of done:
 
 A recruiter or hiring manager can reach the live project, dashboard, and GitHub record from the portfolio website.
 
-## Public Blog / Development Log Plan
+---
+
+# Public Blog / Development Log Plan
 
 Public blog-style writeups may be added later under:
 
-docs/blog/development-log/
-docs/blog/cloudops-learning/
-docs/blog/lessons-learned/
+- `docs/blog/development-log/`
+- `docs/blog/cloudops-learning/`
+- `docs/blog/lessons-learned/`
 
 Allowed public blog topics:
 
-Why the project is built as a live product instead of a lab scrapbook
-How the frontend shell was created
-How the colony state model works
-How the Advance Day loop works
-How CloudWatch monitors the system
-How CloudTrail supports auditability
-How IAM least privilege is used
-How the incident simulation works
-How costs are controlled
+- Why the project is built as a live product instead of a lab scrapbook
+- How the frontend shell was created
+- How the colony state model works
+- How the Advance Day loop works
+- How CloudWatch monitors the system
+- How CloudTrail supports auditability
+- How IAM least privilege is used
+- How the incident simulation works
+- How costs are controlled
 
 Blog posts must be polished and employer-facing.
 
 Do not publish:
 
-raw study packets
-quiz scores
-mistake logs
-confusion notes
-personal routine notes
-private accountability reports
+- Raw study packets
+- Quiz scores
+- Mistake logs
+- Confusion notes
+- Personal routine notes
+- Private accountability reports
 
-## MVP Acceptance Criteria
+---
+
+# MVP Acceptance Criteria
 
 The MVP is complete when:
 
- The project has a live deployed frontend.
- A visitor can view a seeded colony.
- A visitor can trigger or preview an Advance Day action.
- The project displays a journal entry.
- The project has a basic Ops Dashboard page.
- At least one real AWS-backed endpoint exists.
- CloudWatch logs exist for the backend path.
- The README links to project vision, roadmap, architecture, and runbooks.
- The repo contains public-safe documentation only.
- The project can be shown on a portfolio website or LinkedIn.
-
+- [ ] The project has a live deployed frontend.
+- [ ] A visitor can view a seeded colony.
+- [ ] A visitor can trigger or preview an Advance Day action.
+- [ ] The project displays a journal entry.
+- [ ] The project has a basic Ops Dashboard page.
+- [ ] At least one real AWS-backed endpoint exists.
+- [ ] CloudWatch logs exist for the backend path.
+- [ ] The README links to project vision, roadmap, architecture, and runbooks.
+- [ ] The repo contains public-safe documentation only.
+- [ ] The project can be shown on a portfolio website or LinkedIn.
