@@ -22,15 +22,17 @@ The current focus is building clear, professional artifacts that demonstrate ope
 ## Current Status
 
 In progress. Current artifacts are being developed and polished into employer-facing documentation.
+
 ## Architecture
 
-- [AWS CloudOps Security Lab Architecture Diagram v1](diagrams/aws-cloudops-security-lab-v1.md)
+- [AWS CloudOps Security Lab Architecture Diagram v1](docs/architecture/diagrams/aws-cloudops-security-lab-v1.md)
 
 ## Project Documentation
 
+- [Project Vision](docs/project/project-vision.md)
 - [CloudOps Master Map](docs/cloudops-master-map.md)
-- [AWS Lab Template](docs/templates/aws-lab-template.md)
-- [Runbook Template](docs/templates/runbook-template.md)
+- [AWS Lab Template](docs/operations/templates/aws-lab-template.md)
+- [Runbook Template](docs/operations/templates/runbook-template.md)
 
 ## Roadmap
 - [x] Create architecture diagram
@@ -42,8 +44,7 @@ In progress. Current artifacts are being developed and polished into employer-fa
 - [ ] Add screenshots
 - [ ] Add lessons learned
 
-## Runbooks
-- [EC2 SSH Troubleshooting Runbook](runbooks/ec2-ssh-troubleshooting.md)
+- [EC2 SSH Troubleshooting Runbook](docs/operations/runbooks/ec2-ssh-troubleshooting.md)
 
 ## Screenshots
 Coming soon.
