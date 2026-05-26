@@ -35,9 +35,6 @@ In progress. Current artifacts are being developed and polished into employer-fa
 - [AWS Lab Template](docs/operations/templates/aws-lab-template.md)
 - [Runbook Template](docs/operations/templates/runbook-template.md)
 
-## Roadmap
-Coming soon.
-
 ### MVP Foundation
 
 - [x] Create first architecture diagram

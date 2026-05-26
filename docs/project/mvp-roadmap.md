@@ -150,8 +150,6 @@ Definition of done:
 
 The project can be run locally and shows a presentable first page.
 
-Suggested path:
-
 ## Phase 2 — Seeded Colony Demo
 
 Goal:
@@ -411,3 +409,4 @@ The MVP is complete when:
  The README links to project vision, roadmap, architecture, and runbooks.
  The repo contains public-safe documentation only.
  The project can be shown on a portfolio website or LinkedIn.
+
