@@ -31,6 +31,7 @@ In progress. Current artifacts are being developed and polished into employer-fa
 
 - [Project Vision](docs/project/project-vision.md)
 - [MVP Roadmap](docs/project/mvp-roadmap.md)
+- [MVP Architecture](docs/project/mvp-architecture.md)
 - [CloudOps Master Map](docs/cloudops-master-map.md)
 - [AWS Lab Template](docs/operations/templates/aws-lab-template.md)
 - [Runbook Template](docs/operations/templates/runbook-template.md)
@@ -41,7 +42,7 @@ In progress. Current artifacts are being developed and polished into employer-fa
 - [x] Create public project vision document
 - [x] Reorganize documentation structure for the Colony Simulator Ops Showcase
 - [x] Define MVP roadmap
-- [ ] Create MVP architecture document
+- [x] Create MVP architecture document
 - [ ] Create first deployable frontend shell
 
 ### Application Build
