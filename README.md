@@ -26,12 +26,14 @@ In progress. Current artifacts are being developed and polished into employer-fa
 ## Architecture
 
 - [AWS CloudOps Security Lab Architecture Diagram v1](docs/architecture/diagrams/aws-cloudops-security-lab-v1.md)
+- [Colony Simulator VPC Architecture Outline](docs/architecture/diagrams/colony-simulator-vpc-architecture-outline.md)
 
 ## Project Documentation
 
 - [Project Vision](docs/project/project-vision.md)
 - [MVP Roadmap](docs/project/mvp-roadmap.md)
 - [MVP Architecture](docs/project/mvp-architecture.md)
+- [VPC Network Segmentation Decision Record](docs/architecture/decisions/adr-001-vpc-network-segmentation.md)
 - [CloudOps Master Map](docs/cloudops-master-map.md)
 - [AWS Lab Template](docs/operations/templates/aws-lab-template.md)
 - [Runbook Template](docs/operations/templates/runbook-template.md)
