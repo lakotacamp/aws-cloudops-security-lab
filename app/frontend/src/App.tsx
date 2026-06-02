@@ -1,4 +1,5 @@
 import './App.css'
+import { seedColony } from './data/seedColony'
 
 function App() {
   return (
@@ -20,17 +21,63 @@ function App() {
         </div>
       </section>
 
-      <section className="grid">
-        <article id="colony-demo" className="card">
-          <h2>Colony Demo</h2>
-          <p>
-            The first MVP will display a seeded settlement, founding colonists,
-            colony resources, morale, risk, and a journal entry generated from
-            structured simulation state.
-          </p>
-          <p className="status">Status: Frontend shell in progress</p>
-        </article>
+      <section id="colony-demo" className="colony-panel">
+        <div className="section-heading">
+          <p className="eyebrow">Seeded Colony State</p>
+          <h2>{seedColony.name}</h2>
+          <p>{seedColony.location}</p>
+        </div>
 
+        <div className="stat-grid">
+          <article className="stat-card">
+            <span>Day</span>
+            <strong>{seedColony.day}</strong>
+          </article>
+
+          <article className="stat-card">
+            <span>Population</span>
+            <strong>{seedColony.population}</strong>
+          </article>
+
+          <article className="stat-card">
+            <span>Food</span>
+            <strong>{seedColony.food}</strong>
+          </article>
+
+          <article className="stat-card">
+            <span>Morale</span>
+            <strong>{seedColony.morale}</strong>
+          </article>
+
+          <article className="stat-card">
+            <span>Risk</span>
+            <strong>{seedColony.risk}</strong>
+          </article>
+        </div>
+
+        <div className="colony-grid">
+          <article className="card">
+            <h3>Founding Colonists</h3>
+
+            <div className="colonist-list">
+              {seedColony.foundingColonists.map((colonist) => (
+                <section className="colonist-card" key={colonist.name}>
+                  <h4>{colonist.name}</h4>
+                  <p className="colonist-role">{colonist.role}</p>
+                  <p>{colonist.note}</p>
+                </section>
+              ))}
+            </div>
+          </article>
+
+          <article className="card journal-card">
+            <h3>Starter Journal Entry</h3>
+            <p>{seedColony.journalEntry}</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="grid">
         <article id="ops-dashboard" className="card">
           <h2>Ops Dashboard</h2>
           <p>

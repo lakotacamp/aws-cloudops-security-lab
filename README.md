@@ -50,10 +50,10 @@ In progress. Current artifacts are being developed and polished into employer-fa
 
 ### Application Build
 
-- [ ] Build initial colony landing page
-- [ ] Add seeded colony state view
+- [x] Build initial colony landing page
+- [x] Add seeded colony state view
 - [ ] Add basic “Advance Day” interaction
-- [ ] Add placeholder or generated journal entry
+- [ ] Add placeholder or generated journal entry update
 - [ ] Add basic Ops Dashboard page
 
 ### CloudOps / Security Capabilities

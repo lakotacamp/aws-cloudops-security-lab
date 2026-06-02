@@ -107,3 +107,99 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+.colony-panel {
+  max-width: 1120px;
+  margin: 0 auto 1.25rem;
+  padding: 2rem;
+  border: 1px solid rgba(216, 180, 106, 0.22);
+  border-radius: 28px;
+  background: rgba(12, 17, 24, 0.68);
+}
+
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 1.5rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+}
+
+.section-heading p {
+  color: #d8d1c4;
+  line-height: 1.6;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.stat-card {
+  padding: 1.25rem;
+  border: 1px solid rgba(244, 239, 228, 0.14);
+  border-radius: 18px;
+  background: rgba(244, 239, 228, 0.06);
+}
+
+.stat-card span {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #d8d1c4;
+  font-size: 0.85rem;
+}
+
+.stat-card strong {
+  color: #f4efe4;
+  font-size: 1.7rem;
+}
+
+.colony-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.25rem;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #f4efe4;
+}
+
+.colonist-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.colonist-card {
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(244, 239, 228, 0.06);
+}
+
+.colonist-card h4 {
+  margin: 0;
+  color: #f4efe4;
+}
+
+.colonist-role {
+  margin: 0.35rem 0;
+  color: #d8b46a;
+  font-weight: 700;
+}
+
+.journal-card p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 900px) {
+
+  .stat-grid,
+  .colony-grid {
+    grid-template-columns: 1fr;
+  }
+}
