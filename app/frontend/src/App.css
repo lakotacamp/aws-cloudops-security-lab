@@ -203,3 +203,25 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+.advance-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 1.25rem;
+  padding: 0.9rem 1.3rem;
+  border: 0;
+  border-radius: 999px;
+  color: #10151d;
+  background: #d8b46a;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.advance-button:hover {
+  filter: brightness(1.08);
+}
+
+.advance-button:active {
+  transform: translateY(1px);
+}

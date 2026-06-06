@@ -52,7 +52,7 @@ In progress. Current artifacts are being developed and polished into employer-fa
 
 - [x] Build initial colony landing page
 - [x] Add seeded colony state view
-- [ ] Add basic “Advance Day” interaction
+- [x] Add basic “Advance Day” interaction
 - [ ] Add placeholder or generated journal entry update
 - [ ] Add basic Ops Dashboard page
 

@@ -8,6 +8,8 @@ The current frontend provides:
 - A seeded colony state view
 - Founding colonist cards
 - A starter journal entry
+- A frontend-only Advance Day interaction
+- Local React state initialized from seeded colony data
 - An Ops Dashboard placeholder
 - An Architecture Path summary
 - A deployable Vite build target
@@ -18,12 +20,11 @@ This is the first visible application shell. Future iterations will add seeded c
 
 Next planned frontend work:
 
-1. Add local Advance Day interaction.
-2. Update colony state after advancing the day.
+1. Refine the Advance Day resource-change rules.
+2. Add more structured turn outcome data.
 3. Add a placeholder or generated journal entry update.
 4. Add a basic Ops Dashboard page with mock operational data.
 5. Prepare the frontend for deployment.
-
 ---
 
 ## Tech Stack

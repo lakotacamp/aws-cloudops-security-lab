@@ -1,14 +1,16 @@
-type FoundingColonist = {
+export type FoundingColonist = {
     name: string
     role: string
     note: string
 }
 
-type SeedColony = {
+export type SeedColony = {
     name: string
     day: number
     population: number
     food: number
+    water: number
+    medicine: number
     morale: number
     risk: string
     location: string
@@ -21,6 +23,8 @@ export const seedColony: SeedColony = {
     day: 12,
     population: 18,
     food: 146,
+    water: 92,
+    medicine: 24,
     morale: 72,
     risk: 'Moderate',
     location: 'A wind-cut valley below the northern ridge',
