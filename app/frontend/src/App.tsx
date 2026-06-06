@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import './App.css'
 import { seedColony } from './data/seedColony'
-import { advanceDay } from './simulation/advanceDay'
+import { advanceDay, type TurnOutcome } from './simulation/advanceDay'
 
 function App() {
   const [colony, setColony] = useState(seedColony)
+  const [latestTurnOutcome, setLatestTurnOutcome] =
+    useState<TurnOutcome | null>(null)
 
   function handleAdvanceDay() {
-    setColony((currentColony) => advanceDay(currentColony).colony)
+    const result = advanceDay(colony)
+
+    setColony(result.colony)
+    setLatestTurnOutcome(result.outcome)
   }
 
   return (
@@ -76,6 +81,20 @@ function App() {
         <button className="advance-button" onClick={handleAdvanceDay}>
           Advance Day
         </button>
+
+        {latestTurnOutcome && (
+          <article className="turn-outcome-card">
+            <h3>Latest Turn Outcome</h3>
+            <p>{latestTurnOutcome.summary}</p>
+
+            <div className="outcome-grid">
+              <span>Food: {latestTurnOutcome.foodChange}</span>
+              <span>Water: {latestTurnOutcome.waterChange}</span>
+              <span>Medicine: {latestTurnOutcome.medicineChange}</span>
+              <span>Morale: {latestTurnOutcome.moraleChange}</span>
+            </div>
+          </article>
+        )}
 
         <div className="colony-grid">
           <article className="card">

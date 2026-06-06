@@ -11,21 +11,21 @@ The current frontend provides:
 - A frontend-only Advance Day interaction
 - Local React state initialized from seeded colony data
 - Extracted simulation helper logic for advancing colony state
+- A Latest Turn Outcome panel with structured resource-change data
+- A placeholder journal update after advancing the day
 - An Ops Dashboard placeholder
 - An Architecture Path summary
 - A deployable Vite build target
-
-This is the first visible application shell. Future iterations will add seeded colony state, local simulation logic, a basic Ops Dashboard page, deployment, and AWS-backed service status.
 
 ---
 
 Next planned frontend work:
 
 1. Refine the Advance Day resource-change rules.
-2. Add more structured turn outcome data.
-3. Add a placeholder or generated journal entry update.
-4. Add a basic Ops Dashboard page with mock operational data.
-5. Prepare the frontend for deployment.
+2. Add a basic Ops Dashboard page with mock operational data.
+3. Prepare the frontend for deployment.
+4. Deploy the frontend as a public static site.
+5. Begin planning the first AWS-backed API endpoint.
 
 ---
 
