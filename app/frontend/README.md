@@ -1,4 +1,4 @@
-# Colony Simulator Ops Showcase — Frontend
+# Colony Simulator Ops Showcase - Frontend
 
 This is the first React / TypeScript frontend shell for the Colony Simulator Ops Showcase.
 
@@ -10,6 +10,7 @@ The current frontend provides:
 - A starter journal entry
 - A frontend-only Advance Day interaction
 - Local React state initialized from seeded colony data
+- Extracted simulation helper logic for advancing colony state
 - An Ops Dashboard placeholder
 - An Architecture Path summary
 - A deployable Vite build target
@@ -25,6 +26,7 @@ Next planned frontend work:
 3. Add a placeholder or generated journal entry update.
 4. Add a basic Ops Dashboard page with mock operational data.
 5. Prepare the frontend for deployment.
+
 ---
 
 ## Tech Stack
@@ -36,6 +38,16 @@ Next planned frontend work:
 
 ---
 
+## Current Frontend Structure
+
+- `src/App.tsx` handles the visible React page, local colony state, button click behavior, and rendering.
+- `src/data/seedColony.ts` defines the starting colony data and reusable TypeScript types for the colony state.
+- `src/simulation/advanceDay.ts` contains the frontend-only simulation helper that advances the colony by one day and returns updated colony state plus structured turn outcome data.
+
+This separation keeps UI code and simulation logic easier to understand, test, and eventually move into a backend Lambda function.
+
+---
+
 ## Local Development
 
 From the repo root:
@@ -44,3 +56,4 @@ From the repo root:
 cd app/frontend
 npm install
 npm run dev
+```

@@ -1,32 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 import { seedColony } from './data/seedColony'
+import { advanceDay } from './simulation/advanceDay'
 
 function App() {
   const [colony, setColony] = useState(seedColony)
 
   function handleAdvanceDay() {
-    setColony((currentColony) => {
-      const nextDay = currentColony.day + 1
-      const nextFood = Math.max(currentColony.food - 9, 0)
-      const nextWater = Math.max(currentColony.water - 7, 0)
-      const nextMedicine = Math.max(currentColony.medicine - 1, 0)
-      const nextMorale = Math.max(currentColony.morale - 2, 0)
-
-      const nextRisk =
-        nextFood < 80 || nextWater < 50 ? 'Elevated' : currentColony.risk
-
-      return {
-        ...currentColony,
-        day: nextDay,
-        food: nextFood,
-        water: nextWater,
-        medicine: nextMedicine,
-        morale: nextMorale,
-        risk: nextRisk,
-        journalEntry: `Day ${nextDay}: The colony completed another hard day below the northern ridge. Food and water stores were rationed, medicine was checked, and the watch reported that risk remains ${nextRisk.toLowerCase()}.`,
-      }
-    })
+    setColony((currentColony) => advanceDay(currentColony).colony)
   }
 
   return (
