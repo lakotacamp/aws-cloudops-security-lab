@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { opsEvents, opsMetrics } from './data/mockOpsDashboard'
 import { seedColony } from './data/seedColony'
 import { advanceDay, type TurnOutcome } from './simulation/advanceDay'
 
@@ -119,14 +120,42 @@ function App() {
       </section>
 
       <section className="grid">
-        <article id="ops-dashboard" className="card">
-          <h2>Ops Dashboard</h2>
-          <p>
-            The Ops Dashboard will show service health, workflow status, logs,
-            incident history, security posture, and eventually real AWS
-            operational signals.
-          </p>
-          <p className="status">Status: Mock dashboard placeholder</p>
+        <article id="ops-dashboard" className="card ops-dashboard-card">
+          <div className="section-heading compact-heading">
+            <p className="eyebrow">CloudOps Preview</p>
+            <h2>Ops Dashboard</h2>
+            <p>
+              Mock operational signals for the local simulation loop. These
+              panels will later map to CloudWatch metrics, logs, alarms,
+              CloudTrail audit evidence, and incident-response workflows.
+            </p>
+          </div>
+
+          <div className="ops-metric-grid">
+            {opsMetrics.map((metric) => (
+              <section className="ops-metric-card" key={metric.label}>
+                <span>{metric.label}</span>
+                <strong>{metric.value}</strong>
+                <p>{metric.detail}</p>
+              </section>
+            ))}
+          </div>
+
+          <div className="ops-event-list">
+            <h3>Recent Operational Events</h3>
+
+            {opsEvents.map((event) => (
+              <section className="ops-event" key={`${event.time}-${event.title}`}>
+                <span>{event.time}</span>
+                <div>
+                  <strong>{event.title}</strong>
+                  <p>{event.detail}</p>
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <p className="status">Status: Mock dashboard data</p>
         </article>
 
         <article className="card">

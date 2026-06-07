@@ -54,7 +54,7 @@ In progress. Current artifacts are being developed and polished into employer-fa
 - [x] Add seeded colony state view
 - [x] Add basic “Advance Day” interaction
 - [x] Add placeholder or generated journal entry update
-- [ ] Add basic Ops Dashboard page
+- [x] Add basic Ops Dashboard page
 
 ### CloudOps / Security Capabilities
 
