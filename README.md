@@ -38,6 +38,7 @@ In progress. Current artifacts are being developed and polished into employer-fa
 - [CloudOps Master Map](docs/cloudops-master-map.md)
 - [AWS Lab Template](docs/operations/templates/aws-lab-template.md)
 - [Runbook Template](docs/operations/templates/runbook-template.md)
+- [Frontend Static Site Deployment Plan](docs/deployment/frontend-static-site-deployment.md)
 
 ### MVP Foundation
 
