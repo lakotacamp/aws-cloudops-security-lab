@@ -1,4 +1,7 @@
-export type RuntimeConfig = { apiBaseUrl: string };
+export type RuntimeConfig = {
+  apiBaseUrl: string;
+  illustrationsEnabled?: boolean;
+};
 export type Probe = {
   id: string;
   timestamp: string;
@@ -31,7 +34,10 @@ export async function loadRuntimeConfig(): Promise<RuntimeConfig> {
     throw new Error(
       "Runtime configuration is invalid. The colony still works locally.",
     );
-  return { apiBaseUrl: url };
+  return {
+    apiBaseUrl: url,
+    illustrationsEnabled: config.illustrationsEnabled === true,
+  };
 }
 export async function runProbe(
   config: RuntimeConfig,

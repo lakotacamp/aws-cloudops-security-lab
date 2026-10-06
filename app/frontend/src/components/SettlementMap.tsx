@@ -68,8 +68,20 @@ function House({
     </g>
   );
 }
-export default function SettlementMap({ colony }: { colony: SeedColony }) {
+export default function SettlementMap({
+  colony,
+  onSelectResource,
+}: {
+  colony: SeedColony;
+  onSelectResource?: (
+    resource: "food" | "water" | "medicine" | "morale",
+  ) => void;
+}) {
   const [selected, setSelected] = useState(0);
+  function selectSite(index: number) {
+    setSelected(index);
+    onSelectResource?.((["morale", "food", "water", "morale"] as const)[index]);
+  }
   return (
     <div className="settlement">
       <div className="map-topline">
@@ -81,7 +93,7 @@ export default function SettlementMap({ colony }: { colony: SeedColony }) {
       <svg
         className="settlement-art"
         viewBox="0 0 800 510"
-        role="img"
+        role="group"
         aria-label={`Illustrated isometric view of Hearthfall Outpost on day ${colony.day}. Select a building below to learn its role.`}
       >
         <defs>
@@ -201,6 +213,34 @@ export default function SettlementMap({ colony }: { colony: SeedColony }) {
           stroke="#203f31"
           strokeWidth="3"
         />
+        {sites.map((site, i) => (
+          <g
+            key={site.name}
+            className="map-hotspot"
+            role="button"
+            tabIndex={0}
+            aria-label={`Explore ${site.name}`}
+            aria-pressed={selected === i}
+            onClick={() => selectSite(i)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                selectSite(i);
+              }
+            }}
+          >
+            <title>{site.name}</title>
+            <circle
+              cx={site.x}
+              cy={site.y + 10}
+              r="40"
+              fill="transparent"
+              stroke={selected === i ? "#e5c98e" : "transparent"}
+              strokeWidth="2"
+              strokeDasharray="3 5"
+            />
+          </g>
+        ))}
         <g
           fill="#bbcdad"
           fontFamily="monospace"
@@ -233,7 +273,7 @@ export default function SettlementMap({ colony }: { colony: SeedColony }) {
           <button
             key={site.name}
             aria-pressed={i === selected}
-            onClick={() => setSelected(i)}
+            onClick={() => selectSite(i)}
           >
             {site.name}
           </button>
@@ -241,7 +281,14 @@ export default function SettlementMap({ colony }: { colony: SeedColony }) {
       </div>
       <div className="map-caption">
         <strong>{sites[selected].label}</strong>
-        <span>{sites[selected].detail}</span>
+        <span>
+          {sites[selected].detail}{" "}
+          {selected === 1
+            ? `${colony.food} food · ${colony.medicine} medicine.`
+            : selected === 2
+              ? `${colony.water} water in reserve.`
+              : `${colony.morale} morale · day ${colony.day}.`}
+        </span>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { addIllustrations } from "./illustrations.mjs";
 const ref = (name) => ({ Ref: name });
 const sub = (text) => ({ "Fn::Sub": text });
 const attr = (name, field) => ({ "Fn::GetAtt": [name, field] });
@@ -443,6 +444,7 @@ const template = {
     DashboardName: { Value: ref("Dashboard") },
   },
 };
+addIllustrations(template);
 const destination = new URL("./template.json", import.meta.url);
 const output = JSON.stringify(template, null, 2) + "\n";
 if (process.argv.includes("--check")) {

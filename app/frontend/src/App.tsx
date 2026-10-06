@@ -1,26 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import "./Colony.css";
-import SettlementMap from "./components/SettlementMap";
+import ColonyBook from "./components/ColonyBook";
 import Operations from "./components/Operations";
 import Architecture from "./components/Architecture";
-import {
-  advanceDay,
-  expeditionStatus,
-  priorities,
-  weatherFor,
-  type Priority,
-} from "./simulation/advanceDay";
-import {
-  loadExpedition,
-  newExpedition,
-  saveKey,
-  type Expedition,
-} from "./lib/storage";
+import { loadExpedition, saveKey, type Expedition } from "./lib/storage";
 import { loadRuntimeConfig, type RuntimeConfig } from "./lib/operations";
 
 const repository = "https://github.com/lakotacamp/aws-cloudops-security-lab";
-const signed = (number: number) => (number > 0 ? `+${number}` : `${number}`);
 function TomeOrnament() {
   return (
     <svg
@@ -46,8 +33,6 @@ function App() {
   const [view, setView] = useState<"colony" | "operations" | "architecture">(
     "colony",
   );
-  const [priority, setPriority] = useState<Priority>("balanced");
-  const [resetConfirm, setResetConfirm] = useState(false);
   const [config, setConfig] = useState<RuntimeConfig>({ apiBaseUrl: "" });
   const [configError, setConfigError] = useState("");
   const [configLoaded, setConfigLoaded] = useState(false);
@@ -71,42 +56,17 @@ function App() {
       active = false;
     };
   }, []);
-  const { colony, history } = expedition;
-  const outcome = history[0];
-  const status = expeditionStatus(colony);
-  const nextWeather = weatherFor(colony.day + 1);
   function store(next: Expedition) {
-    setExpedition(next);
     try {
       localStorage.setItem(saveKey, JSON.stringify(next));
+      setExpedition(next);
       setNotice("");
     } catch {
+      setExpedition({ ...next, editionId: undefined });
       setNotice(
         "Browser storage is unavailable. You can keep playing, but refresh will lose this session. Export your journal to keep a copy.",
       );
     }
-  }
-  function takeTurn() {
-    const start = performance.now();
-    const result = advanceDay(colony, priority);
-    store({
-      version: 1,
-      colony: result.colony,
-      history: [result.outcome, ...history].slice(0, 18),
-    });
-    setTurnDuration(Math.round((performance.now() - start) * 100) / 100);
-  }
-  function exportJournal() {
-    const url = URL.createObjectURL(
-      new Blob([JSON.stringify(expedition, null, 2)], {
-        type: "application/json",
-      }),
-    );
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `hearthfall-day-${colony.day}.json`;
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   return (
     <div className={`app-shell ${view === "colony" ? "colony-theme" : ""}`}>
@@ -158,8 +118,7 @@ function App() {
             <h1>
               {view === "colony" ? (
                 <>
-                  The Chronicles
-                  <br />
+                  The Chronicles <br />
                   <em>of Hearthfall</em>
                 </>
               ) : view === "operations" ? (
@@ -180,7 +139,7 @@ function App() {
           <div className="intro-side">
             <p>
               {view === "colony"
-                ? "A small settlement at the edge of the known world. Tend its provisions, guide its people, and write the next day of their story."
+                ? "Eighteen lives, recorded one day at a time. Open the ledger, guide the settlement, and turn the next leaf of its history."
                 : view === "operations"
                   ? "Probe the service, introduce a controlled failure, and verify recovery. Inspect what was measured and where it came from."
                   : "A narrow application with a concrete AWS deployment path. Each service has a responsibility, a security boundary, and a cost."}
@@ -213,238 +172,16 @@ function App() {
           </p>
         )}
         <section hidden={view !== "colony"} aria-label="Colony simulator">
-          <div className="section-bar">
-            <div>
-              <span className="eyebrow">CHAPTER I · THE EXPEDITION</span>
-              <h2>Hearthfall Outpost</h2>
-            </div>
-            <div className="day-tag">
-              <span>DAY</span>
-              <strong>{colony.day}</strong>
-              <span>/ 30</span>
-            </div>
-          </div>
-          <div className="colony-layout">
-            <SettlementMap colony={colony} />
-            <aside className="command-panel">
-              <div className="panel-heading">
-                <span className="eyebrow">SETTLEMENT STATUS</span>
-                <span className={`risk risk-${colony.risk.toLowerCase()}`}>
-                  {colony.risk} risk
-                </span>
-              </div>
-              <h3>
-                18 people.
-                <br />
-                One shared future.
-              </h3>
-              <p className="muted">
-                Reach day 30 with food, water, and morale remaining. Medicine
-                supports recovery days.
-              </p>
-              <div className="resource-list">
-                {[
-                  {
-                    name: "Food",
-                    value: colony.food,
-                    max: 200,
-                    icon: "⌁",
-                    change: outcome?.foodChange,
-                  },
-                  {
-                    name: "Water",
-                    value: colony.water,
-                    max: 160,
-                    icon: "◈",
-                    change: outcome?.waterChange,
-                  },
-                  {
-                    name: "Medicine",
-                    value: colony.medicine,
-                    max: 50,
-                    icon: "+",
-                    change: outcome?.medicineChange,
-                  },
-                  {
-                    name: "Morale",
-                    value: colony.morale,
-                    max: 100,
-                    icon: "☀",
-                    change: outcome?.moraleChange,
-                  },
-                ].map((resource) => (
-                  <div className="resource" key={resource.name}>
-                    <div className="resource-title">
-                      <span>
-                        <b aria-hidden="true">{resource.icon}</b>
-                        {resource.name}
-                      </span>
-                      <strong>
-                        {resource.value}
-                        <small>
-                          {resource.change !== undefined
-                            ? signed(resource.change)
-                            : "—"}
-                        </small>
-                      </strong>
-                    </div>
-                    <meter
-                      min="0"
-                      max={resource.max}
-                      value={resource.value}
-                      aria-label={`${resource.name}: ${resource.value} of ${resource.max}`}
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="forecast">
-                <span>Tomorrow’s forecast</span>
-                <strong>{nextWeather}</strong>
-                <small>
-                  {nextWeather === "Rain"
-                    ? "Rain barrels collect +8 water"
-                    : nextWeather === "Frost"
-                      ? "−3 food and −2 morale after your decision"
-                      : "No weather modifier"}
-                </small>
-              </div>
-            </aside>
-          </div>
-          <div className="decision-panel">
-            <div className="decision-heading">
-              <span className="eyebrow">THE COUNCIL’S DELIBERATIONS</span>
-              <h3>Set the day’s priority.</h3>
-              <p className="muted">
-                Every choice has a cost. Weather modifies these base effects.
-              </p>
-            </div>
-            <div className="priority-grid">
-              {priorities.map((item) => (
-                <button
-                  className={`priority ${priority === item.id ? "selected" : ""}`}
-                  key={item.id}
-                  aria-pressed={priority === item.id}
-                  disabled={status !== "active"}
-                  onClick={() => setPriority(item.id)}
-                >
-                  <span className="selection-dot" />
-                  <strong>{item.name}</strong>
-                  <span>{item.description}</span>
-                  <small>{item.effect}</small>
-                </button>
-              ))}
-            </div>
-            <div className="turn-actions">
-              <p role="status">
-                {status === "completed"
-                  ? "Expedition complete. Hearthfall made it to day 30."
-                  : status === "depleted"
-                    ? "The expedition has run out of an essential resource. Start again and try a different balance."
-                    : "Deterministic rules. Real consequences. No model decides the outcome."}
-              </p>
-              <button
-                className="primary-button"
-                disabled={status !== "active"}
-                onClick={takeTurn}
-              >
-                Advance to day {colony.day + 1}{" "}
-                <span aria-hidden="true">→</span>
-              </button>
-            </div>
-          </div>
-          <div className="journal-layout">
-            <section className="journal-panel">
-              <div className="panel-heading">
-                <div>
-                  <span className="eyebrow">THE KEEPER’S RECORD</span>
-                  <h3>From the colony journal.</h3>
-                </div>
-                <button className="text-button" onClick={exportJournal}>
-                  Export JSON ↗
-                </button>
-              </div>
-              <div className="journal-entries" aria-live="polite">
-                {history.length ? (
-                  history.slice(0, 5).map((turn) => (
-                    <article key={turn.day} className="journal-entry">
-                      <div className="journal-day">
-                        DAY<strong>{turn.day}</strong>
-                      </div>
-                      <div>
-                        <span className="entry-meta">
-                          {turn.weather} /{" "}
-                          {priorities.find((p) => p.id === turn.priority)?.name}
-                        </span>
-                        <p>{turn.summary}</p>
-                      </div>
-                    </article>
-                  ))
-                ) : (
-                  <article className="journal-entry">
-                    <div className="journal-day">
-                      DAY<strong>12</strong>
-                    </div>
-                    <div>
-                      <span className="entry-meta">The beginning</span>
-                      <p>{colony.journalEntry}</p>
-                    </div>
-                  </article>
-                )}
-              </div>
-              <p className="fine-print">
-                Rule-generated journal · saved in this browser · latest five
-                entries shown; all entries included in export
-              </p>
-            </section>
-            <aside className="crew-panel">
-              <span className="eyebrow">PEOPLE OF HEARTHFALL</span>
-              <h3>A few of the founders.</h3>
-              {colony.foundingColonists.map((person, i) => (
-                <div className="crew-person" key={person.name}>
-                  <span className={`avatar avatar-${i}`}>
-                    {person.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
-                  <div>
-                    <strong>{person.name}</strong>
-                    <small>{person.role}</small>
-                  </div>
-                </div>
-              ))}
-              <div className="restart-area">
-                {resetConfirm ? (
-                  <>
-                    <p>Replace this browser’s expedition with a fresh camp?</p>
-                    <button
-                      className="text-button"
-                      onClick={() => {
-                        store(newExpedition());
-                        setResetConfirm(false);
-                        setTurnDuration(null);
-                      }}
-                    >
-                      Start fresh
-                    </button>
-                    <button
-                      className="text-button"
-                      onClick={() => setResetConfirm(false)}
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    className="text-button"
-                    onClick={() => setResetConfirm(true)}
-                  >
-                    Start a new expedition ↺
-                  </button>
-                )}
-              </div>
-            </aside>
-          </div>
+          <ColonyBook
+            expedition={expedition}
+            store={store}
+            config={{
+              ...config,
+              illustrationsEnabled:
+                config.illustrationsEnabled && !!expedition.editionId,
+            }}
+            onTurn={setTurnDuration}
+          />
         </section>
         <section hidden={view !== "operations"} aria-label="Operations console">
           <Operations

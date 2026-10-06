@@ -2,6 +2,8 @@
 
 This document describes the v0.2 implementation and its CloudFormation deployment design. See the root README for verified deployment status.
 
+The prepared v0.3 book edition adds an isolated illustrator Lambda, DynamoDB job allowances, and Bedrock. Its current implementation and activation boundary are documented in the [book release review](../deployment/book-release-review.md). The v0.2 description below records the previously verified deployment rather than claiming those new services are already active.
+
 ## Data and request paths
 
 1. Vite builds static HTML, CSS, JavaScript, an original SVG favicon, and public runtime configuration.

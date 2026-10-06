@@ -18,7 +18,7 @@ const services = [
     symbol: "▤",
     purpose: "A private home for the app",
     detail:
-      "Stores the built HTML, CSS, JavaScript, and public runtime configuration. The browser runs the simulation.",
+      "Stores the frontend and completed woodcut PNGs. The browser owns the simulation and the diary; the illustrator can write only under illustrations/.",
     security:
       "Block Public Access, server-side encryption, and a bucket policy restricted to the CloudFront distribution.",
     cost: "Stored bytes and requests. Retained objects can keep accruing small storage charges after stack removal.",
@@ -29,9 +29,9 @@ const services = [
     symbol: "⇄",
     purpose: "A narrow public API",
     detail:
-      "Exposes GET /api/status and POST /api/diagnostic. Route throttles and bounded request handling limit unnecessary work.",
+      "Exposes status, diagnostic, and illustration job routes. The illustrator accepts an anonymous edition ID and a bounded list of game choices, never a freeform prompt.",
     security:
-      "Public, stateless endpoints with no credentials or user data. Throttling is best effort, not a billing cap.",
+      "Public endpoints. Illustration jobs have atomic daily and monthly limits; request throttling alone is not a billing cap.",
     cost: "HTTP API request volume. Traffic abuse can create charges even with low idle cost.",
   },
   {
@@ -40,10 +40,32 @@ const services = [
     symbol: "λ",
     purpose: "Small, inspectable handlers",
     detail:
-      "Returns health evidence or a single intentional 503. The diagnostic never mutates a global flag or persistent colony state.",
+      "One handler returns diagnostic evidence. A separate illustrator validates choices, claims a bounded job, then invokes itself asynchronously to generate the woodcut.",
     security:
-      "Execution role can write only to its log group. No storage permissions, secrets, or VPC access required.",
-    cost: "Invocations and execution time at 128 MB. No provisioned concurrency.",
+      "The diagnostic role can write only its logs. The illustrator has a separate role limited to one model, its job table, its own invocation, logs, and the image prefix.",
+    cost: "Diagnostic runs at 128 MB; illustrator runs at 256 MB. No provisioned concurrency or automatic model retries.",
+  },
+  {
+    name: "DynamoDB",
+    kind: "JOBS & ALLOWANCES",
+    symbol: "▥",
+    purpose: "One paid job per recorded page",
+    detail:
+      "A transaction reserves the unique page job and increments shared daily and monthly counters together. Reopening a page reuses its existing job.",
+    security:
+      "The browser cannot read the table directly. The API returns only a job state and image path. Quota rows expire; completed job records are retained.",
+    cost: "On-demand reads, writes, and storage. The model-attempt limits do not cap these separate request charges.",
+  },
+  {
+    name: "Bedrock",
+    kind: "THE ILLUSTRATOR",
+    symbol: "✧",
+    purpose: "A fresh woodcut for each new turn",
+    detail:
+      "Stable Image Core in us-west-2 draws a scene from the same validated turn that drives the diary. Model output has no authority over game state.",
+    security:
+      "Server-owned prompts, one image per job, no automatic invocation retries. The operator must enable model access and the illustration feature.",
+    cost: "Charged per image. Shared default allowances are 20 attempts per UTC day and 200 per UTC month, including failed attempts.",
   },
   {
     name: "CloudWatch",
@@ -65,7 +87,7 @@ export default function Architecture() {
       <div className="section-bar">
         <div>
           <span className="eyebrow">03 / THE ENGINEERING</span>
-          <h2>Five services. Clear responsibilities.</h2>
+          <h2>A small world. Clear responsibilities.</h2>
         </div>
         <span className="outline-badge">Deployment blueprint</span>
       </div>
@@ -94,8 +116,9 @@ export default function Architecture() {
         </div>
       </div>
       <p className="flow-explanation">
-        Static files: browser → CloudFront → S3. API requests: browser →
-        CloudFront → API Gateway → Lambda. Logs and metrics → CloudWatch.
+        Static files: browser → CloudFront → S3. Probes: API Gateway →
+        diagnostic Lambda. Illustrations: API Gateway → illustrator Lambda →
+        DynamoDB allowance → Bedrock → S3. Logs and metrics → CloudWatch.
       </p>
       <section className="service-detail">
         <div>

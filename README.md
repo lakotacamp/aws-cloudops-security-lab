@@ -16,6 +16,14 @@ The colony uses an antique chronicle theme: parchment, sepia typography, ornamen
 
 ## What is implemented
 
+### Illustrated book edition (v0.3 preparation)
+
+The colony now has facing book pages, animated leaf turns, first-person character diaries, browsable historical maps and ledgers, and interactive supply decisions. An original generated woodcut opens the book. Fresh per-turn AI illustration jobs are implemented with idempotency and atomic public-site allowances, but **AWS model activation and live image verification are pending**. See the [concrete deployment review](docs/deployment/book-release-review.md) and [art direction and prompt record](docs/design/book-art-direction.md). The currently verified AWS service below remains the v0.2 deployment until that review is executed.
+
+![The illustrated book edition](docs/screenshots/hearthfall-book-desktop.jpg)
+
+### Core application and verified AWS deployment
+
 - **Playable simulation:** four priorities, predictable weather, bounded resources, recoverable risk, and a defined win/loss condition.
 - **Browser persistence:** a versioned, validated local save and JSON journal export. Colony data stays in the visitor's browser.
 - **Operations console:** actual current-session probe results, request IDs, client-observed latency, and a controlled failure/recovery flow. Browser-only responses are explicitly labeled.
@@ -93,7 +101,7 @@ Release v0.2.1 (`3afc542`): [16 tests, lint, production build, and infrastructur
 - `infrastructure` — template generator, generated CloudFormation, release helpers.
 - `docs` — architecture decisions, deployment guide, and runbooks.
 
-Older VPC/EC2 diagrams, the original roadmap, and the previous static deployment plan are historical planning artifacts. They are **not** the deployed or current application architecture. This release does not implement EC2, a VPC, DynamoDB, Bedrock, CloudTrail trails, SNS, WAF, or user authentication.
+Older VPC/EC2 diagrams, the original roadmap, and the previous static deployment plan are historical planning artifacts. They are **not** the deployed or current application architecture. The verified v0.2 deployment does not use DynamoDB or Bedrock; the prepared book edition adds those for illustration jobs. EC2, VPC, CloudTrail trails, SNS, WAF, and user authentication remain outside scope.
 
 ## Scope and contribution
 

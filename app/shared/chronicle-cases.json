@@ -1,0 +1,925 @@
+[
+  {
+    "choices": [
+      "balanced"
+    ],
+    "state": [
+      137,
+      85,
+      23,
+      70
+    ],
+    "changes": [
+      -9,
+      -7,
+      -1,
+      -2
+    ],
+    "weather": "Clear",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "balanced",
+      "balanced",
+      "balanced",
+      "balanced"
+    ],
+    "state": [
+      107,
+      72,
+      20,
+      62
+    ],
+    "changes": [
+      -9,
+      1,
+      -1,
+      -2
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "balanced",
+      "forage",
+      "balanced",
+      "forage"
+    ],
+    "state": [
+      149,
+      64,
+      20,
+      64
+    ],
+    "changes": [
+      12,
+      -3,
+      -1,
+      -1
+    ],
+    "weather": "Rain",
+    "narrator": "Sella Myr"
+  },
+  {
+    "choices": [
+      "balanced",
+      "conserve",
+      "balanced",
+      "conserve"
+    ],
+    "state": [
+      117,
+      80,
+      22,
+      56
+    ],
+    "changes": [
+      -4,
+      5,
+      0,
+      -5
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "balanced",
+      "restore",
+      "balanced",
+      "restore"
+    ],
+    "state": [
+      101,
+      68,
+      18,
+      90
+    ],
+    "changes": [
+      -12,
+      -1,
+      -2,
+      12
+    ],
+    "weather": "Rain",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "forage"
+    ],
+    "state": [
+      158,
+      81,
+      23,
+      71
+    ],
+    "changes": [
+      12,
+      -11,
+      -1,
+      -1
+    ],
+    "weather": "Clear",
+    "narrator": "Sella Myr"
+  },
+  {
+    "choices": [
+      "forage",
+      "balanced",
+      "forage",
+      "balanced"
+    ],
+    "state": [
+      149,
+      64,
+      20,
+      64
+    ],
+    "changes": [
+      -9,
+      1,
+      -1,
+      -2
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "forage",
+      "forage",
+      "forage",
+      "forage"
+    ],
+    "state": [
+      191,
+      56,
+      20,
+      66
+    ],
+    "changes": [
+      12,
+      -3,
+      -1,
+      -1
+    ],
+    "weather": "Rain",
+    "narrator": "Sella Myr"
+  },
+  {
+    "choices": [
+      "forage",
+      "conserve",
+      "forage",
+      "conserve"
+    ],
+    "state": [
+      159,
+      72,
+      22,
+      58
+    ],
+    "changes": [
+      -4,
+      5,
+      0,
+      -5
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "forage",
+      "restore",
+      "forage",
+      "restore"
+    ],
+    "state": [
+      143,
+      60,
+      18,
+      92
+    ],
+    "changes": [
+      -12,
+      -1,
+      -2,
+      12
+    ],
+    "weather": "Rain",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "conserve"
+    ],
+    "state": [
+      142,
+      89,
+      24,
+      67
+    ],
+    "changes": [
+      -4,
+      -3,
+      0,
+      -5
+    ],
+    "weather": "Clear",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "balanced",
+      "conserve",
+      "balanced"
+    ],
+    "state": [
+      117,
+      80,
+      22,
+      56
+    ],
+    "changes": [
+      -9,
+      1,
+      -1,
+      -2
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "conserve",
+      "forage",
+      "conserve",
+      "forage"
+    ],
+    "state": [
+      159,
+      72,
+      22,
+      58
+    ],
+    "changes": [
+      12,
+      -3,
+      -1,
+      -1
+    ],
+    "weather": "Rain",
+    "narrator": "Sella Myr"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      127,
+      88,
+      24,
+      50
+    ],
+    "changes": [
+      -4,
+      5,
+      0,
+      -5
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "conserve",
+      "restore",
+      "conserve",
+      "restore"
+    ],
+    "state": [
+      111,
+      76,
+      20,
+      84
+    ],
+    "changes": [
+      -12,
+      -1,
+      -2,
+      12
+    ],
+    "weather": "Rain",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "restore"
+    ],
+    "state": [
+      134,
+      83,
+      22,
+      84
+    ],
+    "changes": [
+      -12,
+      -9,
+      -2,
+      12
+    ],
+    "weather": "Clear",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "restore",
+      "balanced",
+      "restore",
+      "balanced"
+    ],
+    "state": [
+      101,
+      68,
+      18,
+      90
+    ],
+    "changes": [
+      -9,
+      1,
+      -1,
+      -2
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "restore",
+      "forage",
+      "restore",
+      "forage"
+    ],
+    "state": [
+      143,
+      60,
+      18,
+      92
+    ],
+    "changes": [
+      12,
+      -3,
+      -1,
+      -1
+    ],
+    "weather": "Rain",
+    "narrator": "Sella Myr"
+  },
+  {
+    "choices": [
+      "restore",
+      "conserve",
+      "restore",
+      "conserve"
+    ],
+    "state": [
+      111,
+      76,
+      20,
+      84
+    ],
+    "changes": [
+      -4,
+      5,
+      0,
+      -5
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "restore",
+      "restore",
+      "restore",
+      "restore"
+    ],
+    "state": [
+      95,
+      64,
+      16,
+      100
+    ],
+    "changes": [
+      -12,
+      -1,
+      -2,
+      0
+    ],
+    "weather": "Rain",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "conserve"
+    ],
+    "state": [
+      142,
+      89,
+      24,
+      67
+    ],
+    "changes": [
+      -4,
+      -3,
+      0,
+      -5
+    ],
+    "weather": "Clear",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      138,
+      86,
+      24,
+      62
+    ],
+    "changes": [
+      -4,
+      -3,
+      0,
+      -5
+    ],
+    "weather": "Overcast",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      131,
+      83,
+      24,
+      55
+    ],
+    "changes": [
+      -7,
+      -3,
+      0,
+      -7
+    ],
+    "weather": "Frost",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      127,
+      88,
+      24,
+      50
+    ],
+    "changes": [
+      -4,
+      5,
+      0,
+      -5
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      123,
+      85,
+      24,
+      45
+    ],
+    "changes": [
+      -4,
+      -3,
+      0,
+      -5
+    ],
+    "weather": "Clear",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      119,
+      82,
+      24,
+      40
+    ],
+    "changes": [
+      -4,
+      -3,
+      0,
+      -5
+    ],
+    "weather": "Overcast",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      112,
+      79,
+      24,
+      33
+    ],
+    "changes": [
+      -7,
+      -3,
+      0,
+      -7
+    ],
+    "weather": "Frost",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore"
+    ],
+    "state": [
+      100,
+      78,
+      22,
+      45
+    ],
+    "changes": [
+      -12,
+      -1,
+      -2,
+      12
+    ],
+    "weather": "Rain",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve"
+    ],
+    "state": [
+      96,
+      75,
+      22,
+      40
+    ],
+    "changes": [
+      -4,
+      -3,
+      0,
+      -5
+    ],
+    "weather": "Clear",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      92,
+      72,
+      22,
+      35
+    ],
+    "changes": [
+      -4,
+      -3,
+      0,
+      -5
+    ],
+    "weather": "Overcast",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore"
+    ],
+    "state": [
+      77,
+      63,
+      20,
+      45
+    ],
+    "changes": [
+      -15,
+      -9,
+      -2,
+      10
+    ],
+    "weather": "Frost",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve"
+    ],
+    "state": [
+      73,
+      68,
+      20,
+      40
+    ],
+    "changes": [
+      -4,
+      5,
+      0,
+      -5
+    ],
+    "weather": "Rain",
+    "narrator": "Tovin Reed"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve"
+    ],
+    "state": [
+      69,
+      65,
+      20,
+      35
+    ],
+    "changes": [
+      -4,
+      -3,
+      0,
+      -5
+    ],
+    "weather": "Clear",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore"
+    ],
+    "state": [
+      57,
+      56,
+      18,
+      47
+    ],
+    "changes": [
+      -12,
+      -9,
+      -2,
+      12
+    ],
+    "weather": "Overcast",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve"
+    ],
+    "state": [
+      50,
+      53,
+      18,
+      40
+    ],
+    "changes": [
+      -7,
+      -3,
+      0,
+      -7
+    ],
+    "weather": "Frost",
+    "narrator": "Mara Venn"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "forage"
+    ],
+    "state": [
+      62,
+      50,
+      17,
+      39
+    ],
+    "changes": [
+      12,
+      -3,
+      -1,
+      -1
+    ],
+    "weather": "Rain",
+    "narrator": "Sella Myr"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "forage",
+      "restore"
+    ],
+    "state": [
+      50,
+      41,
+      15,
+      51
+    ],
+    "changes": [
+      -12,
+      -9,
+      -2,
+      12
+    ],
+    "weather": "Clear",
+    "narrator": "Elian Cor"
+  },
+  {
+    "choices": [
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "conserve",
+      "restore",
+      "conserve",
+      "forage",
+      "restore",
+      "forage"
+    ],
+    "state": [
+      62,
+      30,
+      14,
+      50
+    ],
+    "changes": [
+      12,
+      -11,
+      -1,
+      -1
+    ],
+    "weather": "Overcast",
+    "narrator": "Sella Myr"
+  }
+]
