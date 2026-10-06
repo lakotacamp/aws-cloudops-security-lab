@@ -31,6 +31,9 @@ elif [[ "$mode" == 'upload' ]]; then
   [[ -n "$bucket" && "$bucket" != 'None' && -n "$distribution" && "$distribution" != 'None' ]] || { echo 'Missing stack outputs.' >&2; exit 1; }
   aws s3 sync dist/ "s3://$bucket/" --region "$region" --exclude 'assets/*' --cache-control 'no-cache'
   aws s3 sync dist/assets/ "s3://$bucket/assets/" --region "$region" --cache-control 'public,max-age=31536000,immutable'
+  # ZIP extraction can preserve an older timestamp on a same-size entry point.
+  # Always publish HTML after its fingerprinted assets instead of relying on sync.
+  aws s3 cp dist/index.html "s3://$bucket/index.html" --region "$region" --content-type 'text/html' --cache-control 'no-cache'
   aws cloudfront create-invalidation --distribution-id "$distribution" --paths '/index.html' '/runtime-config.json' '/' >/dev/null
   printf '\nSite URL: %s\n' "$(output SiteUrl)"
   printf 'Verify health, diagnostic failure, logs, and alarm transitions using the runbook.\n'
