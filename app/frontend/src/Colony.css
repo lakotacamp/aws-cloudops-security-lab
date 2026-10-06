@@ -1,0 +1,503 @@
+/* The chronicle palette is active only while viewing the colony. */
+.app-shell {
+  min-height: 100vh;
+}
+.colony-theme {
+  --bg: #f0e4c8;
+  --panel: #f3e8ce;
+  --line: #bda780;
+  --muted: #705b43;
+  --gold: #8c4f2c;
+  --green: #526044;
+  color: #35291e;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  background:
+    radial-gradient(ellipse at 4% 15%, #a8743230, transparent 32%),
+    radial-gradient(ellipse at 98% 55%, #ae7c3730, transparent 34%),
+    repeating-linear-gradient(0deg, #704c1d04 0 1px, transparent 1px 4px),
+    linear-gradient(
+      90deg,
+      #c8af7f,
+      #e7d5b0 2%,
+      #f3e8cd 8%,
+      #f0e4c8 49%,
+      #f6ebd3 78%,
+      #e7d5b0 98%,
+      #c8af7f
+    );
+  box-shadow: inset 0 0 90px #79502120;
+}
+.colony-theme ::selection {
+  background: #9b673b;
+  color: #fff5df;
+}
+.colony-theme .site-header {
+  border-bottom: 3px double #9a7b50;
+}
+.colony-theme .brand {
+  letter-spacing: 0.18em;
+}
+.colony-theme .brand small,
+.colony-theme .eyebrow,
+.colony-theme .day-tag span,
+.colony-theme .map-topline span:last-child,
+.colony-theme .priority small,
+.colony-theme .journal-day,
+.colony-theme footer {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+}
+.colony-theme .brand-mark {
+  color: #7b3828;
+  border: 3px double #9d7241;
+  border-radius: 2px;
+  background: #b49a6620;
+  box-shadow: 3px 3px 0 #9d724126;
+}
+.colony-theme .site-header nav button {
+  color: #624b34;
+  border: 1px solid transparent;
+  border-radius: 0;
+  font-size: 13px;
+}
+.colony-theme .site-header nav button[aria-current] {
+  color: #713c29;
+  background: #ad89501a;
+  border-color: #ab8b5e;
+  box-shadow: inset 0 0 0 3px #f1e3c5;
+}
+.colony-theme .site-header nav button:hover {
+  color: #7b3022;
+  background: #a678321a;
+}
+.colony-theme .page-intro {
+  position: relative;
+  padding: 64px 0 74px;
+  align-items: center;
+  grid-template-columns: 1.2fr 0.8fr;
+}
+.colony-theme .page-intro .eyebrow {
+  letter-spacing: 0.22em;
+  font-size: 10px;
+  margin-bottom: 20px;
+}
+.colony-theme h1 {
+  font-size: clamp(46px, 5.4vw, 78px);
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+  text-shadow: 0 1px #fff9e7;
+}
+.colony-theme h1 em {
+  color: #84412b;
+  font-size: 0.87em;
+}
+.colony-theme .intro-side {
+  max-width: 345px;
+  justify-self: end;
+  border-left: 1px solid #a88859;
+  padding-left: 30px;
+}
+.colony-theme .intro-side p {
+  color: #614c35;
+  font-size: 15px;
+  line-height: 1.85;
+  margin-bottom: 22px;
+}
+.folio-label {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+  font-size: 12px;
+  color: #755333;
+}
+.folio-label span:first-child {
+  font-size: 9px;
+  letter-spacing: 0.17em;
+}
+.tome-ornament {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 37px;
+  color: #967345;
+  pointer-events: none;
+}
+.colony-theme .section-bar {
+  border-top: 3px double #a68a5d;
+  padding-top: 25px;
+}
+.colony-theme .section-bar h2 {
+  font-size: 32px;
+}
+.colony-theme .day-tag {
+  border: 3px double #996b43;
+  border-radius: 50%;
+  width: 100px;
+  height: 72px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  color: #7b3828;
+  transform: rotate(-4deg);
+  flex-shrink: 0;
+  box-shadow: inset 0 0 0 4px #eadbbc;
+}
+.colony-theme .day-tag strong {
+  font-size: 32px;
+}
+.colony-theme .day-tag span {
+  font-size: 9px;
+}
+.colony-theme
+  :is(
+    .settlement,
+    .command-panel,
+    .decision-panel,
+    .journal-panel,
+    .crew-panel
+  ) {
+  position: relative;
+  border: 1px solid #a58b60;
+  border-radius: 2px;
+  background: linear-gradient(115deg, #fff9e247, #b8974c0d), #eee0bd;
+  box-shadow:
+    0 3px 8px #69421e14,
+    inset 0 0 26px #9b742319;
+}
+.colony-theme
+  :is(
+    .settlement,
+    .command-panel,
+    .decision-panel,
+    .journal-panel,
+    .crew-panel
+  )::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid #aa8b564f;
+  pointer-events: none;
+  background:
+    linear-gradient(#8e673c, #8e673c) left top / 22px 1px no-repeat,
+    linear-gradient(#8e673c, #8e673c) left top / 1px 22px no-repeat,
+    linear-gradient(#8e673c, #8e673c) right bottom / 22px 1px no-repeat,
+    linear-gradient(#8e673c, #8e673c) right bottom / 1px 22px no-repeat;
+}
+.colony-theme .map-topline {
+  color: #59442c;
+  font-size: 15px;
+  font-style: italic;
+}
+.colony-theme .map-topline span:last-child {
+  color: #725735;
+  font-size: 9px;
+  font-style: normal;
+}
+.colony-theme .map-topline .live-dot {
+  background: #8c4f2c;
+  box-shadow: none;
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+.colony-theme .settlement-art {
+  filter: sepia(0.85) saturate(0.65);
+  mix-blend-mode: multiply;
+}
+.colony-theme .settlement-art text {
+  fill: #55412b;
+  font-family: Georgia, serif;
+  font-size: 11px;
+}
+.colony-theme .building-selector button {
+  color: #61472c;
+  background: #f8edcf;
+  border-color: #ab8c5e;
+  border-radius: 0;
+  font-size: 11px;
+}
+.colony-theme .building-selector button[aria-pressed="true"] {
+  color: #fbefd4;
+  background: #735138;
+  border-color: #735138;
+}
+.colony-theme .map-caption {
+  background: #c4a77626;
+  border-color: #b49a6e;
+}
+.colony-theme .map-caption strong {
+  color: #543c29;
+  font-size: 12px;
+}
+.colony-theme .map-caption span {
+  color: #675039;
+  font-size: 12px;
+}
+.colony-theme .command-panel h3 {
+  color: #463123;
+  font-size: 34px;
+}
+.colony-theme .muted {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.colony-theme .risk {
+  background: #d4d6b8;
+  border-color: #7e895e;
+  color: #465132;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 10px;
+}
+.colony-theme .risk-elevated {
+  color: #734419;
+  background: #ebcf94;
+  border-color: #a67435;
+}
+.colony-theme .risk-critical {
+  color: #822e23;
+  background: #e7bd9e;
+  border-color: #a26249;
+}
+.colony-theme .resource-title {
+  font-size: 14px;
+}
+.colony-theme .resource-title span {
+  color: #55412e;
+}
+.colony-theme .resource-title small {
+  color: #705b43;
+}
+.colony-theme meter,
+.colony-theme meter::-webkit-meter-bar {
+  background: #cfbf9b;
+  border-radius: 0;
+}
+.colony-theme meter::-webkit-meter-optimum-value {
+  background: #7c8058;
+  border-radius: 0;
+}
+.colony-theme meter::-moz-meter-bar {
+  background: #7c8058;
+}
+.colony-theme .forecast {
+  background: #b3956220;
+  border-color: #bda780;
+}
+.colony-theme .forecast strong {
+  color: #5b5332;
+}
+.colony-theme .forecast small,
+.colony-theme .forecast > span {
+  color: #6a5337;
+}
+.colony-theme .decision-panel {
+  margin-top: 26px;
+  padding: 30px;
+}
+.colony-theme .decision-heading h3 {
+  font-size: 29px;
+}
+.colony-theme .priority {
+  border: 1px solid #b79c70;
+  border-radius: 1px;
+  background: #f3e7cb;
+  padding: 20px 17px;
+}
+.colony-theme .priority.selected {
+  border-color: #8d4c32;
+  background: #e6d1aa;
+  box-shadow: inset 0 0 0 3px #f4e6c7;
+}
+.colony-theme .selection-dot {
+  border-color: #987849;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+.colony-theme .selected .selection-dot {
+  background: #8d4c32;
+  border-color: #8d4c32;
+  box-shadow: inset 0 0 0 2px #e6d1aa;
+}
+.colony-theme .priority strong {
+  color: #4e3526;
+  font-size: 15px;
+}
+.colony-theme .priority > span:not(.selection-dot) {
+  color: #6e563c;
+  font-size: 12px;
+}
+.colony-theme .priority small {
+  color: #764326;
+  font-size: 10px;
+}
+.colony-theme .turn-actions p {
+  font-size: 12px;
+  font-style: italic;
+}
+.colony-theme .primary-button {
+  color: #fff0d4;
+  background: #7f3e2c;
+  border: 3px double #caa47a;
+  border-radius: 1px;
+  box-shadow: 2px 3px 0 #97623c30;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+}
+.colony-theme .primary-button:hover:not(:disabled) {
+  background: #653021;
+}
+.colony-theme .journal-panel {
+  background:
+    linear-gradient(90deg, #bd995621, transparent 5%, #fff7df47 95%, #bd995621),
+    #f2e7cc;
+}
+.colony-theme .journal-panel h3,
+.colony-theme .crew-panel h3 {
+  color: #503829;
+}
+.colony-theme .text-button {
+  color: #813c27;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: #b0875d;
+}
+.colony-theme .journal-day {
+  color: #765838;
+  letter-spacing: 0.1em;
+}
+.colony-theme .journal-day strong {
+  color: #8a422b;
+  font-size: 29px;
+}
+.colony-theme .entry-meta {
+  color: #875934;
+}
+.colony-theme .journal-entry p {
+  color: #513e2b;
+  font-size: 16px;
+  line-height: 1.9;
+}
+.colony-theme .journal-entry:first-child p::first-letter {
+  float: left;
+  font:
+    50px/0.85 Georgia,
+    serif;
+  color: #873e2b;
+  padding: 7px 7px 0 0;
+}
+.colony-theme .fine-print {
+  color: #766045;
+  font-size: 10px;
+  font-style: italic;
+}
+.colony-theme .avatar {
+  background: #d7c29b;
+  color: #70422c;
+  border: 3px double #977749;
+  border-radius: 50%;
+  width: 40px;
+  height: 46px;
+}
+.colony-theme .crew-person strong {
+  font-size: 14px;
+}
+.colony-theme .crew-person small {
+  font-size: 12px;
+  font-style: italic;
+}
+.colony-theme .project-note {
+  border-top: 3px double #a68a5d;
+}
+.colony-theme .project-note p {
+  font-size: 13px;
+}
+.colony-theme .project-note a {
+  color: #813c27;
+  font-size: 12px;
+}
+.colony-theme footer,
+.colony-theme footer > span:first-child,
+.colony-theme footer small {
+  color: #6c5439;
+}
+.colony-theme .notice {
+  color: #733d20;
+  background: #efdab0;
+  border-color: #b28a4e;
+}
+@media (max-width: 800px) {
+  .colony-theme .page-intro {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    padding: 44px 0 65px;
+  }
+  .colony-theme .intro-side {
+    justify-self: start;
+    max-width: 540px;
+    padding-left: 20px;
+  }
+  .colony-theme .intro-side p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  .colony-theme .command-panel h3 {
+    font-size: 29px;
+  }
+  .colony-theme .map-caption {
+    display: block;
+  }
+}
+@media (max-width: 480px) {
+  .colony-theme .page-intro .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.16em;
+  }
+  .colony-theme h1 {
+    font-size: clamp(40px, 11vw, 52px);
+  }
+  .colony-theme .section-bar h2 {
+    font-size: 25px;
+  }
+  .colony-theme .day-tag {
+    width: 78px;
+    height: 64px;
+    gap: 4px;
+  }
+  .colony-theme .day-tag strong {
+    font-size: 27px;
+  }
+  .colony-theme .decision-panel {
+    padding: 20px;
+  }
+  .colony-theme .priority {
+    padding: 16px 12px;
+  }
+  .colony-theme .priority strong {
+    font-size: 13px;
+  }
+  .colony-theme .priority > span:not(.selection-dot) {
+    font-size: 11px;
+  }
+  .colony-theme .priority small {
+    font-size: 9px;
+  }
+  .colony-theme .map-topline {
+    font-size: 13px;
+  }
+  .colony-theme .map-topline span:last-child {
+    font-size: 7px;
+  }
+  .colony-theme .building-selector button {
+    font-size: 9px;
+  }
+  .colony-theme .journal-entry p {
+    font-size: 14px;
+  }
+}

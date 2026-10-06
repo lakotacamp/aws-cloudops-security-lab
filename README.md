@@ -8,9 +8,11 @@
 
 Keep 18 settlers alive until day 30. Choose a priority, advance a day, and see deterministic resource changes and a readable journal. Open Operations to probe a service, introduce a request-scoped failure, and verify recovery.
 
-![Hearthfall browser edition](docs/screenshots/hearthfall-desktop.jpg)
+![Hearthfall colony chronicle](docs/screenshots/hearthfall-desktop.jpg)
 
 [Mobile view](docs/screenshots/hearthfall-mobile.jpg). These overview screenshots show the browser edition. [Live AWS request evidence](docs/screenshots/hearthfall-aws-requests.jpg) records the deployed API exercise.
+
+The colony uses an antique chronicle theme: parchment, sepia typography, ornamental borders, a compass rose, and journal drop caps. Operations and Architecture retain their original dark green palette. The theme uses local fonts, CSS, and SVG without external image or font requests.
 
 ## What is implemented
 

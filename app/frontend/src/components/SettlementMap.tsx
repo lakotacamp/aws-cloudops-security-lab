@@ -76,7 +76,7 @@ export default function SettlementMap({ colony }: { colony: SeedColony }) {
         <span>
           <i className="live-dot" /> Hearthfall valley
         </span>
-        <span>FIELD STATION / 01</span>
+        <span>PLATE I · SURVEY OF THE VALLEY</span>
       </div>
       <svg
         className="settlement-art"
@@ -85,6 +85,15 @@ export default function SettlementMap({ colony }: { colony: SeedColony }) {
         aria-label={`Illustrated isometric view of Hearthfall Outpost on day ${colony.day}. Select a building below to learn its role.`}
       >
         <defs>
+          <pattern
+            id="engraving"
+            width="5"
+            height="5"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(25)"
+          >
+            <path d="M0 0v5" stroke="#e5dab1" strokeWidth=".7" />
+          </pattern>
           <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
             <stop stopColor="#526a4f" />
             <stop offset="1" stopColor="#304e3b" />
@@ -111,6 +120,11 @@ export default function SettlementMap({ colony }: { colony: SeedColony }) {
         <ellipse cx="412" cy="260" rx="350" ry="245" fill="url(#glow)" />
         <path d="m82 285 300-174 333 181-301 175z" fill="#0b2019" />
         <path d="m82 269 300-174 333 181-301 175z" fill="url(#land)" />
+        <path
+          d="m82 269 300-174 333 181-301 175z"
+          fill="url(#engraving)"
+          opacity=".2"
+        />
         <path d="m82 269 332 182v16L82 285z" fill="#293b2d" />
         <path d="m414 451 301-175v16L414 467z" fill="#20392e" />
         <path
@@ -196,7 +210,19 @@ export default function SettlementMap({ colony }: { colony: SeedColony }) {
           <text x="647" y="112">
             N
           </text>
-          <path d="m651 121-5 20 5-5 5 5z" fill="#b8c8a8" />
+          <g stroke="#806b47" strokeWidth=".8" fill="none">
+            <circle cx="651" cy="144" r="23" />
+            <circle cx="651" cy="144" r="19" />
+            <path d="M651 114v60m-30-30h60m-48-18 36 36m-36 0 36-36" />
+            <path
+              d="m651 119 5 20 20 5-20 5-5 20-5-20-20-5 20-5z"
+              fill="#d3c197"
+            />
+            <path
+              d="m651 119 0 25 5-5zM676 144h-25l5 5zM651 169v-25l-5 5zM626 144h25l-5-5z"
+              fill="#806b47"
+            />
+          </g>
           <text x="86" y="410">
             NORTHERN RIDGE
           </text>

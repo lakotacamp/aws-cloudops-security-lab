@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import "./Colony.css";
 import SettlementMap from "./components/SettlementMap";
 import Operations from "./components/Operations";
 import Architecture from "./components/Architecture";
@@ -20,6 +21,24 @@ import { loadRuntimeConfig, type RuntimeConfig } from "./lib/operations";
 
 const repository = "https://github.com/lakotacamp/aws-cloudops-security-lab";
 const signed = (number: number) => (number > 0 ? `+${number}` : `${number}`);
+function TomeOrnament() {
+  return (
+    <svg
+      className="tome-ornament"
+      viewBox="0 0 240 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g fill="none" stroke="currentColor" strokeWidth="1">
+        <path d="M8 20h70m84 0h70M20 16h45m110 0h45M74 20c16 0 17-14 29-14 9 0 10 10 3 10-6 0-4-7 1-5M166 20c-16 0-17-14-29-14-9 0-10 10-3 10 6 0 4-7-1-5M74 20c16 0 17 14 29 14 9 0 10-10 3-10-6 0-4 7 1 5M166 20c-16 0-17 14-29 14-9 0-10-10-3-10 6 0 4 7-1 5" />
+        <path d="m120 8 8 12-8 12-8-12z" />
+      </g>
+      <circle cx="120" cy="20" r="2" fill="currentColor" />
+      <circle cx="5" cy="20" r="2" fill="currentColor" />
+      <circle cx="235" cy="20" r="2" fill="currentColor" />
+    </svg>
+  );
+}
 function App() {
   const [initial] = useState(loadExpedition);
   const [expedition, setExpedition] = useState(initial.expedition);
@@ -90,7 +109,7 @@ function App() {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   return (
-    <>
+    <div className={`app-shell ${view === "colony" ? "colony-theme" : ""}`}>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -131,14 +150,17 @@ function App() {
         <section className="page-intro">
           <div>
             <p className="eyebrow">
-              <span /> AN INTERACTIVE SYSTEMS PROJECT
+              <span />{" "}
+              {view === "colony"
+                ? "AN ACCOUNT OF EIGHTEEN SETTLERS"
+                : "AN INTERACTIVE SYSTEMS PROJECT"}
             </p>
             <h1>
               {view === "colony" ? (
                 <>
-                  A small world.
+                  The Chronicles
                   <br />
-                  <em>A real systems story.</em>
+                  <em>of Hearthfall</em>
                 </>
               ) : view === "operations" ? (
                 <>
@@ -158,19 +180,27 @@ function App() {
           <div className="intro-side">
             <p>
               {view === "colony"
-                ? "Keep a frontier settlement alive. Make a decision, advance a day, and follow the consequences — from colony state to operational evidence."
+                ? "A small settlement at the edge of the known world. Tend its provisions, guide its people, and write the next day of their story."
                 : view === "operations"
                   ? "Probe the service, introduce a controlled failure, and verify recovery. Inspect what was measured and where it came from."
                   : "A narrow application with a concrete AWS deployment path. Each service has a responsibility, a security boundary, and a cost."}
             </p>
-            <div className="mode-label">
-              <i className="live-dot" />{" "}
-              {config.apiBaseUrl
-                ? "API endpoint configured"
-                : "Playable browser edition"}
-              <span>v0.2</span>
-            </div>
+            {view === "colony" ? (
+              <div className="folio-label">
+                <span>VOLUME I</span>
+                <span>A thirty-day expedition</span>
+              </div>
+            ) : (
+              <div className="mode-label">
+                <i className="live-dot" />{" "}
+                {config.apiBaseUrl
+                  ? "API endpoint configured"
+                  : "Playable browser edition"}
+                <span>v0.2</span>
+              </div>
+            )}
           </div>
+          {view === "colony" && <TomeOrnament />}
         </section>
         {notice && (
           <p className="notice" role="status">
@@ -185,7 +215,7 @@ function App() {
         <section hidden={view !== "colony"} aria-label="Colony simulator">
           <div className="section-bar">
             <div>
-              <span className="eyebrow">01 / THE EXPEDITION</span>
+              <span className="eyebrow">CHAPTER I · THE EXPEDITION</span>
               <h2>Hearthfall Outpost</h2>
             </div>
             <div className="day-tag">
@@ -282,7 +312,7 @@ function App() {
           </div>
           <div className="decision-panel">
             <div className="decision-heading">
-              <span className="eyebrow">YOUR NEXT MOVE</span>
+              <span className="eyebrow">THE COUNCIL’S DELIBERATIONS</span>
               <h3>Set the day’s priority.</h3>
               <p className="muted">
                 Every choice has a cost. Weather modifies these base effects.
@@ -326,7 +356,7 @@ function App() {
             <section className="journal-panel">
               <div className="panel-heading">
                 <div>
-                  <span className="eyebrow">THE RECORD</span>
+                  <span className="eyebrow">THE KEEPER’S RECORD</span>
                   <h3>From the colony journal.</h3>
                 </div>
                 <button className="text-button" onClick={exportJournal}>
@@ -457,7 +487,7 @@ function App() {
         <span>React · TypeScript · AWS deployment blueprint</span>
         <a href={repository}>Built in the open ↗</a>
       </footer>
-    </>
+    </div>
   );
 }
 export default App;
