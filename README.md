@@ -4,6 +4,8 @@
 
 **Colony Simulator Ops Showcase** by Lakota Camp. A playable frontier settlement paired with an inspectable AWS operations environment.
 
+**[Play Hearthfall](https://lakotacamp.github.io/aws-cloudops-security-lab/)** · [Architecture](docs/architecture/hearthfall.md) · [Incident runbook](docs/operations/runbooks/diagnostic-failure.md)
+
 Keep 18 settlers alive until day 30. Choose a priority, advance a day, and see deterministic resource changes and a readable journal. Open Operations to probe a service, introduce a request-scoped failure, and verify recovery.
 
 ![Hearthfall browser edition](docs/screenshots/hearthfall-desktop.jpg)
@@ -19,7 +21,7 @@ Keep 18 settlers alive until day 30. Choose a priority, advance a day, and see d
 - **AWS infrastructure as code:** private S3, CloudFront origin access control, API Gateway HTTP API, Lambda, CloudWatch logs, a dashboard, and a 5xx alarm.
 - **Validation:** simulation and persistence tests, backend tests, lint/build checks, and CloudFormation schema validation in GitHub Actions.
 
-**Deployment status:** the AWS template is implemented and locally validated. A deployed AWS environment and live alarm transitions have not yet been verified. A template, a browser demonstration, and production evidence are distinct things.
+**Deployment status:** the browser edition is live on GitHub Pages. The AWS template is implemented and passes local and CI validation; AWS deployment and live alarm transitions remain pending. Browser probes are explicitly simulated until an API is configured.
 
 ## Try it locally
 
@@ -76,6 +78,8 @@ cfn-lint infrastructure/template.json
 ```
 
 Tests cover state immutability, resource boundaries and actual deltas, weather, risk recovery, a complete expedition, save validation, and API healthy → diagnostic 503 → healthy behavior. They do not prove deployed IAM permissions, edge routing, metrics delivery, or alarm transitions; verify those with the deployment checklist.
+
+Release `84b54d8`: [application and infrastructure verification passed](https://github.com/lakotacamp/aws-cloudops-security-lab/actions/runs/37408879713), and [Pages deployment succeeded](https://github.com/lakotacamp/aws-cloudops-security-lab/actions/runs/37408879640). Browser checks verified desktop/mobile layout, a resource-changing turn, persistence after refresh, restart, request failure/recovery, and exported JSON. The public page was opened and tested after deployment.
 
 ## Repository map
 
