@@ -1,6 +1,6 @@
 # Illustrated book release review
 
-Status on 2026-10-06: the book interface and the approved illustration infrastructure are deployed. CloudFormation reached UPDATE_COMPLETE with eleven added resources and an in-place API stage update; no existing resource was replaced. The owner completed model activation, and fresh woodcuts for days 13 and 14 were generated and delivered through CloudFront. The live Operations health probe returned HTTP 200 and retained its green styling. The public runtime configuration enables image requests.
+Status on 2026-10-06: the book interface and the approved illustration infrastructure are deployed. CloudFormation reached UPDATE_COMPLETE with eleven added resources and an in-place API stage update; no existing resource was replaced. The owner completed model activation, and fresh woodcuts for days 13, 14, and 15 were generated and delivered through CloudFront. The live Operations health probe returned HTTP 200 and retained its green styling. The public runtime configuration enables image requests. The final update changed illustration code and its unchanged API integration dependency without replacing resources or expanding permissions.
 
 ## Experience
 
@@ -18,7 +18,7 @@ The diary is assembled deterministically from character-specific prose, the chos
 - Original PNGs stored behind the existing private S3/CloudFront origin. Public paths contain opaque job hashes. A generated image is public to anyone with its URL.
 - Seven-day logs, a failure metric, and a failure alarm. No notification subscription is added. Logs omit request bodies and prompts.
 
-The main stack stays in `us-east-1`; only the Bedrock model request goes to `us-west-2`. Stable Image Core was observed ACTIVE in the account's model catalog on 2026-10-06. Model agreement availability was NOT_AVAILABLE, so the account owner must activate access before the first invocation. Nova Canvas and Titan Image Generator v2 have reached end of life and were not selected.
+The main stack stays in `us-east-1`; only the Bedrock model request goes to `us-west-2`. Stable Image Core was observed ACTIVE in the account's model catalog on 2026-10-06. The account owner completed the initial model run and agreement activation before public image requests were enabled. Nova Canvas and Titan Image Generator v2 have reached end of life and were not selected.
 
 ## Cost controls and limits
 
@@ -44,7 +44,11 @@ bash deploy.sh hearthfall-live us-east-1 upload
 
 Upload reads the stack's `EnableIllustrations` parameter and writes the matching runtime flag. GitHub Pages remains a browser edition and never sends image requests.
 
-Verify: take one new turn, observe queued → generated, inspect the fresh woodcut, refresh and reopen the page, confirm no additional job/model attempt, and run a normal Operations health check. Inspect model/worker errors if the plate fails. This verification is still pending.
+Verified on the live site: day 13 used Mara's watch/ration diary; a foraging turn produced Sella's day-14 diary and a distinct PNG; a recovery turn produced Elian's day-15 diary and a foreground scene of settlers sharing a meal. The final prompt puts people and action before scenery. The images remain illustrative interpretations rather than guarantees of every depicted detail.
+
+After refresh, opening the historical day-13 leaf automatically retrieved its original image and correctly displayed food 137 / water 85. The latest day-15 plate also retained its URL after refresh. A consistent database read showed exactly three ready jobs and both daily/monthly counts equal to three. No new allowance was consumed by reopening these pages. Desktop facing-page layout and mobile interactive morale details were checked with the real generated images; mobile content width matched the viewport. The source passed 33 tests, ESLint, a production build, template consistency checks, and cfn-lint, including GitHub Actions.
+
+The upload script explicitly uploads the HTML entry point after its fingerprinted assets. This avoids a same-size HTML file being skipped when ZIP extraction preserves an older timestamp.
 
 To stop new and in-flight workers before model invocation, update `EnableIllustrations=false`; upload the matching runtime config. Already-generated images remain viewable. Monthly/day counters are keyed by UTC date and do not need manual resets. Do not delete a job to retry it casually: doing so breaks its once-only generation guarantee.
 

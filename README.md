@@ -8,9 +8,9 @@
 
 Keep 18 settlers alive until day 30. Choose a priority, advance a day, and see deterministic resource changes and a readable journal. Open Operations to probe a service, introduce a request-scoped failure, and verify recovery.
 
-![Hearthfall colony chronicle](docs/screenshots/hearthfall-desktop.jpg)
+![Hearthfall's live illustrated history book](docs/screenshots/hearthfall-book-live.png)
 
-[Mobile view](docs/screenshots/hearthfall-mobile.jpg). These overview screenshots show the browser edition. [Live AWS request evidence](docs/screenshots/hearthfall-aws-requests.jpg) records the deployed API exercise.
+[Mobile ledger](docs/screenshots/hearthfall-book-live-mobile.png). These screenshots show the live AWS book and a freshly generated recovery-day woodcut. [Live AWS request evidence](docs/screenshots/hearthfall-aws-requests.jpg) records the diagnostic API exercise.
 
 The colony uses an antique chronicle theme: parchment, sepia typography, ornamental borders, a compass rose, and journal drop caps. Operations and Architecture retain their original dark green palette. The theme uses local fonts, CSS, and SVG without external image or font requests.
 
@@ -18,7 +18,7 @@ The colony uses an antique chronicle theme: parchment, sepia typography, ornamen
 
 ### Illustrated book edition (v0.3)
 
-The colony has facing book pages, animated leaf turns, character-specific first-person diaries, browsable historical maps and ledgers, and interactive supply decisions. An original generated woodcut opens the book. The AWS edition generates a fresh woodcut for each new turn through Bedrock, with saved images, duplicate-request protection, and shared allowances of 20 jobs/day and 200/month. The live service generated distinct plates for two recorded days; the diagnostic service retained its v0.2 behavior and returned HTTP 200 after the update. Diaries are rule-generated from actual events. See the [deployment review](docs/deployment/book-release-review.md) and [art direction and prompt record](docs/design/book-art-direction.md).
+The colony has facing book pages, animated leaf turns, character-specific first-person diaries, browsable historical maps and ledgers, and interactive supply decisions. An original generated woodcut opens the book. The AWS edition generates a fresh woodcut for each new turn through Bedrock, with saved images, duplicate-request protection, and shared allowances of 20 jobs/day and 200/month. Live verification produced three distinct plates and confirmed that refresh and history navigation reused them without spending another allowance. The diagnostic service retained its v0.2 behavior and returned HTTP 200 after the update. Diaries are rule-generated from actual events. See the [deployment review](docs/deployment/book-release-review.md) and [art direction and prompt record](docs/design/book-art-direction.md).
 
 ![The illustrated book edition](docs/screenshots/hearthfall-book-desktop.jpg)
 
