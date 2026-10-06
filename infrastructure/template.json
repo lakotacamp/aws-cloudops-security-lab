@@ -232,6 +232,10 @@
     },
     "ApiStage": {
       "Type": "AWS::ApiGatewayV2::Stage",
+      "DependsOn": [
+        "StatusRoute",
+        "DiagnosticRoute"
+      ],
       "Properties": {
         "ApiId": {
           "Ref": "HttpApi"

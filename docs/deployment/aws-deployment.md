@@ -37,6 +37,8 @@ node infrastructure/package-release.mjs
 
 The packager prints an ignored `.artifacts/release-*` directory containing only `dist`, `template.json`, and `deploy.sh`. Its runtime configuration uses same-origin `/api`. Zip **the contents** of that directory for a CloudShell upload. It contains no credentials, `.git`, private configuration, or source dependencies.
 
+The [v0.2.0 release](https://github.com/lakotacamp/aws-cloudops-security-lab/releases/tag/v0.2.0) also provides this prebuilt archive and a SHA-256 checksum. If browser upload is unavailable, download the archive and `SHA256SUMS.txt` from that release directly into a new CloudShell directory, verify with `sha256sum -c SHA256SUMS.txt`, and then unzip it. This avoids copying AWS credentials to a local machine.
+
 ## Deploy using AWS Console and CloudShell
 
 1. Sign in with an authorized IAM/SSO identity. Select **US East (N. Virginia)**. Use the console's CloudShell; do not copy session credentials to the repository.

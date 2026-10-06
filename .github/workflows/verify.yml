@@ -25,5 +25,6 @@ jobs:
         working-directory: app/frontend
       - run: python -m unittest discover -s app/backend -p 'test_*.py' -v
       - run: node infrastructure/build-template.mjs --check
+      - run: node --test infrastructure/template.test.mjs
       - run: pip install -r infrastructure/requirements-validation.txt
       - run: cfn-lint infrastructure/template.json

@@ -158,6 +158,8 @@ const template = {
     },
     ApiStage: {
       Type: "AWS::ApiGatewayV2::Stage",
+      // RouteSettings keys are plain strings, so CloudFormation cannot infer these dependencies.
+      DependsOn: ["StatusRoute", "DiagnosticRoute"],
       Properties: {
         ApiId: ref("HttpApi"),
         StageName: "$default",
