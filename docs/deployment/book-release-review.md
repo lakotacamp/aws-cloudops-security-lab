@@ -1,6 +1,6 @@
 # Illustrated book release review
 
-Status: implemented and locally tested; AWS activation and the first live model-generated turn remain pending. The existing v0.2 AWS deployment is unchanged until this change set is executed.
+Status on 2026-10-06: the book interface and the approved RC2 infrastructure are deployed. CloudFormation reached UPDATE_COMPLETE with eleven added illustration resources and an in-place API stage update; no existing resource was replaced. The live Operations health probe returned HTTP 200 and retained its green styling. Model activation and the first live model-generated turn remain pending, so the public runtime configuration keeps image requests disabled.
 
 ## Experience
 

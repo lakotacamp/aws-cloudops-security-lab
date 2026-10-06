@@ -18,7 +18,7 @@ The colony uses an antique chronicle theme: parchment, sepia typography, ornamen
 
 ### Illustrated book edition (v0.3 preparation)
 
-The colony now has facing book pages, animated leaf turns, first-person character diaries, browsable historical maps and ledgers, and interactive supply decisions. An original generated woodcut opens the book. Fresh per-turn AI illustration jobs are implemented with idempotency and atomic public-site allowances, but **AWS model activation and live image verification are pending**. See the [concrete deployment review](docs/deployment/book-release-review.md) and [art direction and prompt record](docs/design/book-art-direction.md). The currently verified AWS service below remains the v0.2 deployment until that review is executed.
+The colony now has facing book pages, animated leaf turns, first-person character diaries, browsable historical maps and ledgers, and interactive supply decisions. An original generated woodcut opens the book. The book interface and its AWS illustration infrastructure are deployed; **model activation and live image verification are pending**, so browser image requests remain disabled. Fresh per-turn AI jobs use idempotency and atomic public-site allowances. See the [deployment review](docs/deployment/book-release-review.md) and [art direction and prompt record](docs/design/book-art-direction.md). The diagnostic service below retains its v0.2 behavior and returned HTTP 200 after this update.
 
 ![The illustrated book edition](docs/screenshots/hearthfall-book-desktop.jpg)
 
