@@ -155,14 +155,18 @@ def handler(event, context):
         if item["choices"]["S"] != encoded_choices:
             return response(409, {"message": "This page already has a different account."})
         return response(200, public_job(item))
+    daily_limit = int(os.environ.get("DAILY_IMAGE_LIMIT", "20"))
+    monthly_limit = int(os.environ.get("MONTHLY_IMAGE_LIMIT", "200"))
+    if daily_limit <= 0 or monthly_limit <= 0:
+        return response(429, {"message": "The illustration allowance is exhausted. Try later."})
     now = datetime.now(timezone.utc)
     created = int(now.timestamp())
     item = {"id": {"S": job_id}, "status": {"S": "queued"}, "created": {"N": str(created)}, "choices": {"S": encoded_choices}}
     try:
         # All three writes succeed together. Failed claims never consume a partial allowance.
         db.transact_write_items(TransactItems=[
-            quota_update(table, now.strftime("quota-day-%Y-%m-%d"), int(os.environ.get("DAILY_IMAGE_LIMIT", "20")), created + 93 * 86400),
-            quota_update(table, now.strftime("quota-month-%Y-%m"), int(os.environ.get("MONTHLY_IMAGE_LIMIT", "200")), created + 93 * 86400),
+            quota_update(table, now.strftime("quota-day-%Y-%m-%d"), daily_limit, created + 93 * 86400),
+            quota_update(table, now.strftime("quota-month-%Y-%m"), monthly_limit, created + 93 * 86400),
             {"Put": {"TableName": table, "Item": item, "ConditionExpression": "attribute_not_exists(id)"}},
         ])
     except Exception as exc:

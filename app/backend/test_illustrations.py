@@ -88,6 +88,13 @@ class IllustrationTests(unittest.TestCase):
         self.assertFalse(self.db.items)
         self.model.invoke_model.assert_not_called()
 
+    def test_zero_allowance_blocks_the_first_job_without_writing_or_dispatching(self):
+        for setting in ("DAILY_IMAGE_LIMIT", "MONTHLY_IMAGE_LIMIT"):
+            with self.subTest(setting=setting), patch.dict(os.environ, {setting: "0"}), patch.object(self.db, "transact_write_items") as transaction:
+                self.assertEqual(self.call()[0], 429)
+                transaction.assert_not_called()
+        self.functions.invoke.assert_not_called()
+
     def test_different_choices_cannot_replace_an_existing_page(self):
         self.call()
         self.assertEqual(self.call({"editionId": EDITION, "choices": ["restore"]})[0], 409)

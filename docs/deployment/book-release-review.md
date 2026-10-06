@@ -26,7 +26,7 @@ Default limits: **20 new jobs per UTC day and 200 per UTC month**, shared across
 
 These are model-attempt limits, not an AWS billing cap. API traffic, database operations, Lambda, storage, delivery, logs, and the extra alarm can still incur charges. Confirm the model's current offer before activation. Images and the retained table continue to incur storage charges until deliberately cleaned up.
 
-The account's Bedrock agreement offer, read on 2026-10-06 without accepting it, lists Stable Image Core output at **$0.04 per image** (`USW2_Created_image`). At that rate, 20 images cost $0.80 and 200 images cost $8.00, before the separate infrastructure charges above. The owner must review and accept the model offer; no model agreement was created during preparation.
+The account's Bedrock agreement offer, read on 2026-10-06 without accepting it, lists Stable Image Core output at **$0.04 per image** (`USW2_Created_image`). At that rate, 20 images cost $0.80 and 200 images cost $8.00, before the separate infrastructure charges above. The owner must review and authorize acceptance of the model offer, or accept it themselves; no model agreement was created during preparation. Setting either allowance to zero blocks every new job while existing plates remain readable.
 
 ## Deployment
 
@@ -36,7 +36,7 @@ Build and package a root-path release. In the extracted release directory:
 bash deploy.sh hearthfall-live us-east-1 prepare-book
 ```
 
-This creates an **unexecuted** change set with illustration limits 20/day and 200/month. Review added resources and IAM scope. The owner must approve the new runtime access and complete any model agreement themselves. Execute the reviewed change set, wait for UPDATE_COMPLETE, then:
+This creates an **unexecuted** change set with illustration limits 20/day and 200/month. Review added resources and IAM scope. The owner must approve the new runtime access and authorize acceptance of the model agreement before activation. Execute the reviewed change set, wait for UPDATE_COMPLETE, then:
 
 ```sh
 bash deploy.sh hearthfall-live us-east-1 upload
