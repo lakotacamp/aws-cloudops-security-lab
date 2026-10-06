@@ -1,6 +1,6 @@
 # AWS deployment, cost, and cleanup
 
-Target: a dedicated `hearthfall-showcase` CloudFormation stack in `us-east-1`. The repository includes an implementation; confirm actual deployment separately. Do not reuse an unrelated stack or bucket.
+Target: the dedicated `hearthfall-live` CloudFormation stack in `us-east-1`. See the README and deployment evidence for verified status. Do not reuse an unrelated stack or bucket.
 
 ## Cost review before creation
 
@@ -30,6 +30,7 @@ npm --prefix app/frontend run lint
 npm --prefix app/frontend run build
 python -m unittest discover -s app/backend -p 'test_*.py' -v
 node infrastructure/build-template.mjs --check
+node --test infrastructure/template.test.mjs
 pip install -r infrastructure/requirements-validation.txt
 cfn-lint infrastructure/template.json
 node infrastructure/package-release.mjs
@@ -37,16 +38,16 @@ node infrastructure/package-release.mjs
 
 The packager prints an ignored `.artifacts/release-*` directory containing only `dist`, `template.json`, and `deploy.sh`. Its runtime configuration uses same-origin `/api`. Zip **the contents** of that directory for a CloudShell upload. It contains no credentials, `.git`, private configuration, or source dependencies.
 
-The [v0.2.0 release](https://github.com/lakotacamp/aws-cloudops-security-lab/releases/tag/v0.2.0) also provides this prebuilt archive and a SHA-256 checksum. If browser upload is unavailable, download the archive and `SHA256SUMS.txt` from that release directly into a new CloudShell directory, verify with `sha256sum -c SHA256SUMS.txt`, and then unzip it. This avoids copying AWS credentials to a local machine.
+The [v0.2.1 release](https://github.com/lakotacamp/aws-cloudops-security-lab/releases/tag/v0.2.1) provides this prebuilt archive and a SHA-256 checksum. If browser upload is unavailable, download `hearthfall-aws-v0.2.1.zip` and `SHA256SUMS-v0.2.1.txt` from that release directly into a new CloudShell directory, verify with `sha256sum -c SHA256SUMS-v0.2.1.txt`, and then unzip it. This avoids copying AWS credentials to a local machine. Version 0.2.1 fixes a route/stage creation-order defect in the original AWS package.
 
 ## Deploy using AWS Console and CloudShell
 
 1. Sign in with an authorized IAM/SSO identity. Select **US East (N. Virginia)**. Use the console's CloudShell; do not copy session credentials to the repository.
 2. Review the cost table, generated template, and deployment script. It creates a public CloudFront site and stateless API, plus a restricted Lambda execution role. CloudFormation requires `CAPABILITY_IAM` acknowledgement.
 3. Upload the release ZIP with **CloudShell → Actions → Upload file**. Unzip into a new empty directory and enter that directory.
-4. Run `bash deploy.sh hearthfall-showcase us-east-1`. The script first creates an unexecuted change set and prints a review command. It does not create resources at this stage.
+4. Run `bash deploy.sh hearthfall-live us-east-1`. The script first creates an unexecuted change set and prints a review command. It does not create resources at this stage.
 5. Review the change set in CloudFormation, including IAM, S3 access policies, and public API/distribution. Execute it only after accepting the resource scope and usage charges.
-6. Wait for `CREATE_COMPLETE` or `UPDATE_COMPLETE`, then run `bash deploy.sh hearthfall-showcase us-east-1 upload`. The script verifies stack completion, uploads static files, applies cache metadata, and invalidates entry/config files. It does not delete old assets.
+6. Wait for `CREATE_COMPLETE` or `UPDATE_COMPLETE`, then run `bash deploy.sh hearthfall-live us-east-1 upload`. The script verifies stack completion, uploads static files, applies cache metadata, and invalidates entry/config files. It does not delete old assets.
 7. Open the printed SiteUrl. Complete the verification below before describing the project as operating on AWS.
 
 The deploying identity needs permissions to create/update the listed CloudFormation resources, pass the Lambda role, upload to the project bucket, and invalidate the project distribution. Runtime permissions are much narrower. An account SCP, permission boundary, resource quota, or service restriction can still block deployment even when schema validation passes.

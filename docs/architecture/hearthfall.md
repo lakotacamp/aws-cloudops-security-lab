@@ -41,4 +41,6 @@ There are no static AWS credentials, secrets, database permissions, or outbound 
 
 Edit `app/backend/handler.py` or `infrastructure/build-template.mjs`, regenerate `template.json`, then run tests and `cfn-lint`. Review the CloudFormation change set before deployment. Update static files with immutable caching for hashed assets and no-cache for entry/config files. Keep old assets through a release rollback window.
 
+The API stage explicitly depends on both route resources. Its route-specific throttle keys are plain strings, which do not establish an implicit CloudFormation dependency. See the [deployment incident and regression fix](../operations/deployment-incident.md).
+
 The stack uses no VPC or NAT because Lambda has no private dependencies. No database is needed while saves are local. Additional services should solve an observed requirement rather than enlarge the service list.
