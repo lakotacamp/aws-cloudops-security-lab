@@ -16,16 +16,16 @@ The colony uses an antique chronicle theme: parchment, sepia typography, ornamen
 
 ## What is implemented
 
-### Illustrated book edition (v0.3 preparation)
+### Illustrated book edition (v0.3)
 
-The colony now has facing book pages, animated leaf turns, first-person character diaries, browsable historical maps and ledgers, and interactive supply decisions. An original generated woodcut opens the book. The book interface and its AWS illustration infrastructure are deployed; **model activation and live image verification are pending**, so browser image requests remain disabled. Fresh per-turn AI jobs use idempotency and atomic public-site allowances. See the [deployment review](docs/deployment/book-release-review.md) and [art direction and prompt record](docs/design/book-art-direction.md). The diagnostic service below retains its v0.2 behavior and returned HTTP 200 after this update.
+The colony has facing book pages, animated leaf turns, character-specific first-person diaries, browsable historical maps and ledgers, and interactive supply decisions. An original generated woodcut opens the book. The AWS edition generates a fresh woodcut for each new turn through Bedrock, with saved images, duplicate-request protection, and shared allowances of 20 jobs/day and 200/month. The live service generated distinct plates for two recorded days; the diagnostic service retained its v0.2 behavior and returned HTTP 200 after the update. Diaries are rule-generated from actual events. See the [deployment review](docs/deployment/book-release-review.md) and [art direction and prompt record](docs/design/book-art-direction.md).
 
 ![The illustrated book edition](docs/screenshots/hearthfall-book-desktop.jpg)
 
 ### Core application and verified AWS deployment
 
 - **Playable simulation:** four priorities, predictable weather, bounded resources, recoverable risk, and a defined win/loss condition.
-- **Browser persistence:** a versioned, validated local save and JSON journal export. Colony data stays in the visitor's browser.
+- **Browser persistence:** a versioned, validated local save and JSON journal export. Simulation state stays in the browser; illustration requests send an anonymous edition UUID and recorded choices for server validation.
 - **Operations console:** actual current-session probe results, request IDs, client-observed latency, and a controlled failure/recovery flow. Browser-only responses are explicitly labeled.
 - **Python API:** stateless health and diagnostic endpoints, structured logs, request validation, and diagnostics disabled by default.
 - **AWS infrastructure as code:** private S3, CloudFront origin access control, API Gateway HTTP API, Lambda, CloudWatch logs, a dashboard, and a 5xx alarm.
@@ -53,8 +53,13 @@ flowchart LR
     Edge -->|Static files / signed origin requests| Bucket[Private S3]
     Edge -->|/api/* / no caching| API[API Gateway HTTP API]
     API --> Function[Lambda / Python]
+    API --> Illustrator[Separate illustrator Lambda]
+    Illustrator --> Jobs[DynamoDB / atomic job and quota claim]
+    Illustrator --> Model[Bedrock Stable Image Core / us-west-2]
+    Illustrator -->|Generated PNGs| Bucket
     API --> Logs[CloudWatch logs and metrics]
     Function --> Logs
+    Illustrator --> Logs
     Logs --> Alarm[API 5xx alarm + dashboard]
 ```
 

@@ -9,6 +9,69 @@ type Plate = {
 };
 const jobs = new Map<string, Promise<Plate>>();
 
+async function readPlate(
+  config: RuntimeConfig,
+  id: string,
+  allowMissing = false,
+): Promise<Plate> {
+  for (let i = 0; i < 70; i++) {
+    const check = await fetch(`${config.apiBaseUrl}/illustrations/${id}`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(12000),
+    });
+    if (allowMissing && check.status === 404) return { status: "idle" };
+    if (!check.ok)
+      throw new Error(
+        "The illustration could not be checked. Reopen this page to check it again.",
+      );
+    const result = await check.json();
+    if (result.status === "ready") {
+      if (!/^\/illustrations\/[a-f0-9]{64}\.png$/.test(result.imageUrl))
+        throw new Error("The illustration address could not be verified.");
+      return { status: "ready", imageUrl: result.imageUrl };
+    }
+    if (result.status === "failed")
+      throw new Error(
+        "The illustrator could not finish this plate. The diary remains complete.",
+      );
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+  }
+  throw new Error(
+    "The ink is taking longer than expected. Reopen this page to check the plate.",
+  );
+}
+
+function failedPlate(error: unknown): Plate {
+  return {
+    status: "failed",
+    message:
+      error instanceof Error
+        ? error.message
+        : "The illustrator is unavailable.",
+  };
+}
+
+async function recallPlate(
+  config: RuntimeConfig,
+  editionId: string,
+  page: ChroniclePage,
+): Promise<Plate> {
+  const key = `${editionId}:${page.colony.day}`;
+  if (jobs.has(key)) return jobs.get(key)!;
+  try {
+    const digest = await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(`woodcut-v1:${editionId}:${page.colony.day}`),
+    );
+    const id = Array.from(new Uint8Array(digest), (byte) =>
+      byte.toString(16).padStart(2, "0"),
+    ).join("");
+    return await readPlate(config, id, true);
+  } catch (error) {
+    return failedPlate(error);
+  }
+}
+
 async function commission(
   config: RuntimeConfig,
   editionId: string,
@@ -34,40 +97,8 @@ async function commission(
       throw new Error(
         "The illustrator is unavailable. Your diary and game are safely recorded.",
       );
-    for (let i = 0; i < 70; i++) {
-      const check = await fetch(
-        `${config.apiBaseUrl}/illustrations/${body.id}`,
-        { cache: "no-store", signal: AbortSignal.timeout(12000) },
-      );
-      if (!check.ok)
-        throw new Error(
-          "The illustration could not be checked. Reopen this page to check it again.",
-        );
-      const result = await check.json();
-      if (result.status === "ready") {
-        if (!/^\/illustrations\/[a-f0-9]{64}\.png$/.test(result.imageUrl))
-          throw new Error("The illustration address could not be verified.");
-        return { status: "ready", imageUrl: result.imageUrl } as Plate;
-      }
-      if (result.status === "failed")
-        throw new Error(
-          "The illustrator could not finish this plate. The diary remains complete.",
-        );
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-    }
-    throw new Error(
-      "The ink is taking longer than expected. Reopen this page to check the plate.",
-    );
-  })().catch(
-    (error) =>
-      ({
-        status: "failed",
-        message:
-          error instanceof Error
-            ? error.message
-            : "The illustrator is unavailable.",
-      }) as Plate,
-  );
+    return readPlate(config, body.id);
+  })().catch(failedPlate);
   jobs.set(key, request);
   const result = await request;
   if (result.status !== "ready") jobs.delete(key);
@@ -91,15 +122,13 @@ export default function Woodcut({
   const [requested, setRequested] = useState(0);
   const opening = !page.outcome;
   useEffect(() => {
-    if (
-      opening ||
-      !config.apiBaseUrl ||
-      !config.illustrationsEnabled ||
-      (!automatic && !requested)
-    )
-      return;
+    if (opening || !config.apiBaseUrl || !config.illustrationsEnabled) return;
     let active = true;
-    void commission(config, editionId, page).then((result) => {
+    const task =
+      automatic || requested
+        ? commission(config, editionId, page)
+        : recallPlate(config, editionId, page);
+    void task.then((result) => {
       if (active) setPlate(result);
     });
     return () => {

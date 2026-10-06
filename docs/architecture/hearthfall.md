@@ -1,18 +1,20 @@
 # Hearthfall: current architecture
 
-This document describes the v0.2 implementation and its CloudFormation deployment design. See the root README for verified deployment status.
+This document describes the v0.3 book edition and its CloudFormation deployment design. See the root README for verified deployment status.
 
-The prepared v0.3 book edition adds an isolated illustrator Lambda, DynamoDB job allowances, and Bedrock. Its current implementation and activation boundary are documented in the [book release review](../deployment/book-release-review.md). The v0.2 description below records the previously verified deployment rather than claiming those new services are already active.
+The book edition adds an isolated illustrator Lambda, DynamoDB job allowances, and Bedrock. Its deployment, model costs, and controls are documented in the [book release review](../deployment/book-release-review.md). The diagnostic API keeps the verified v0.2 behavior.
 
 ## Data and request paths
 
 1. Vite builds static HTML, CSS, JavaScript, an original SVG favicon, and public runtime configuration.
-2. React loads a validated local save or the seeded day-12 expedition. No colony state leaves the browser.
+2. React loads a validated local save or the seeded day-12 expedition. The browser owns the simulation; image requests send only an anonymous edition UUID and recorded choices.
 3. A priority plus deterministic weather produces a new state and journal outcome. Resource deltas reflect actual changes after clamping.
 4. React saves the expedition to localStorage and updates the UI. Storage failure produces a notice; play continues in memory.
 5. A visitor-triggered probe calls the configured API, or a clearly labeled browser simulation when no endpoint is configured.
 6. In AWS, CloudFront forwards `/api/*` to API Gateway without caching. The allowlisted route invokes Lambda.
 7. Lambda returns a request ID and logs structured evidence. Native API/Lambda metrics feed a private CloudWatch dashboard and an API 5xx alarm.
+8. On a new turn, the separate illustration API replays allowlisted choices, then atomically claims a unique edition/day job and daily/monthly allowance in DynamoDB. It invokes its asynchronous worker once.
+9. The worker creates an event-specific woodcut through Stable Image Core in `us-west-2`, writes the PNG under `illustrations/*` in private S3, and marks the job ready. CloudFront serves the image. Historical pages read existing jobs without creating new art; refresh reuses the same job.
 
 Browser timings include client/network overhead. Lambda's `durationMs` measures handler work. CloudWatch Lambda Duration is service telemetry. None is presented as interchangeable with the others.
 
@@ -23,12 +25,13 @@ Browser timings include client/network overhead. Lambda's `durationMs` measures 
 | Internet → frontend | CloudFront HTTPS, CSP, HSTS, frame denial, nosniff | Static resources are intentionally public. |
 | CloudFront → S3 | OAC SigV4, all S3 Block Public Access settings, distribution-scoped read policy, TLS-only bucket access | Deployment identity can upload new application code. |
 | API Gateway → Lambda | Invoke policy restricted to this account and API path | The HTTP API is intentionally public and directly reachable. |
-| Lambda → AWS | Execution role allows only writing its own pre-created log group | Deployer requires broader permissions to manage infrastructure; it is not the runtime identity. |
+| Diagnostic Lambda → AWS | Execution role allows only writing its own pre-created log group | Deployer requires broader permissions to manage infrastructure; it is not the runtime identity. |
+| Illustrator → AWS | Separate role: one model, one table, its own invocation/logs, and only the bucket's illustrations prefix | Public visitors share finite model allowances; other AWS usage charges are not capped. |
 | Anonymous visitor → diagnostic | Default disabled, one request only, route throttle 0.1 rps/burst 1, three-second Lambda timeout | Throttles are best effort; callers can generate usage charges and intentional 5xx alarms. |
 | Browser → persistence | Version/bounds validation and text rendering | LocalStorage is not tamper-proof or backed up. Same-origin script can access it. |
 | Service → logs | No bodies, headers, query strings, or source IPs in configured application/access log formats; seven-day retention | Account operators can see request identifiers and timing. AWS retains its own platform records under its policies. |
 
-There are no static AWS credentials, secrets, database permissions, or outbound service calls in the runtime. CORS is browser behavior, not authorization. The frontend does not publish AWS account IDs, log streams, dashboard access, or credentials.
+There are no static AWS credentials or secrets in the application. The diagnostic runtime has no database or model access; the illustrator has only its explicit scoped permissions. CORS is browser behavior, not authorization. The frontend does not publish AWS account IDs, log streams, dashboard access, or credentials.
 
 ## Failure behavior and recovery
 

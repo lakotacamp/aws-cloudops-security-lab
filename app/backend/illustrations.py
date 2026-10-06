@@ -34,16 +34,17 @@ def replay(choices):
 
 def image_prompt(turn):
     scene = {
-        "balanced": "Settlers keep the ordinary watch and distribute daily rations beside the timber council house.",
-        "forage": "Sella leads foragers home through a pine woodland, carrying their gathered provisions toward the storehouse.",
-        "conserve": "Mara measures smaller rations from the storehouse at a rough table, with quiet settlers holding wooden bowls.",
-        "restore": "Elian sits beside the medicine chest as the settlers rest together and share a generous meal by the cookfire.",
+        "balanced": "Three settlers dominate the foreground: Mara hands a loaf of bread to a waiting settler while a watchkeeper stands beside their ration table.",
+        "forage": "Three foragers dominate the foreground: Sella and two companions walk toward us carrying large woven baskets full of gathered provisions, returning from the pine woodland.",
+        "conserve": "Three settlers dominate the foreground: Mara measures a small ration at a rough table, while two tired settlers hold out wooden bowls.",
+        "restore": "Three settlers dominate the foreground: the medic Elian kneels beside an open medicine chest and tends a seated settler while their companion serves a steaming bowl beside a cookfire.",
     }[turn["priority"]]
     weather = {"Rain": "Rain falls on timber roofs and collection barrels.", "Frost": "Frost lies on roofs and provisions; settlers draw wool coats close.", "Overcast": "Clouds cover the northern ridge.", "Clear": "A clear sky above the northern ridge."}[turn["weather"]]
-    return ("A single authentic seventeenth-century woodcut illustration for the fictional history book Hearthfall. "
+    return (f"{scene} The human figures and their action occupy most of the picture; their hands and tools are clearly visible. "
+            "An authentic seventeenth-century narrative woodcut for the fictional history book Hearthfall. "
             "Dark umber ink on warm ivory paper, bold irregular hand-carved lines, dense cross-hatching, worn print edges, fine rectangular engraved border. "
-            "Flat printed artwork, landscape composition. Small frontier settlement with timber cottages, a palisade and pine woods. "
-            f"Illustrate this event from day {turn['day']}'s diary, witnessed by {turn['narrator']}: {scene} {weather} "
+            f"This is the event from day {turn['day']}'s diary, witnessed by {turn['narrator']}. {weather} "
+            "Flat printed artwork, landscape composition. A few timber cottages and pine trees recede into a simple background. "
             "Plain historical wool and linen clothes, wooden tools. Quiet human storytelling. No lettering, labels, numbers, modern technology, photograph, book mockup or fantasy creatures.")
 
 

@@ -1,6 +1,6 @@
 # Illustrated book release review
 
-Status on 2026-10-06: the book interface and the approved RC2 infrastructure are deployed. CloudFormation reached UPDATE_COMPLETE with eleven added illustration resources and an in-place API stage update; no existing resource was replaced. The live Operations health probe returned HTTP 200 and retained its green styling. Model activation and the first live model-generated turn remain pending, so the public runtime configuration keeps image requests disabled.
+Status on 2026-10-06: the book interface and the approved illustration infrastructure are deployed. CloudFormation reached UPDATE_COMPLETE with eleven added resources and an in-place API stage update; no existing resource was replaced. The owner completed model activation, and fresh woodcuts for days 13 and 14 were generated and delivered through CloudFront. The live Operations health probe returned HTTP 200 and retained its green styling. The public runtime configuration enables image requests.
 
 ## Experience
 
