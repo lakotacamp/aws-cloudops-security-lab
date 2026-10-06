@@ -1,0 +1,29 @@
+name: Verify application and infrastructure
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: app/frontend/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: npm ci
+        working-directory: app/frontend
+      - run: npm test && npm run lint && npm run build
+        working-directory: app/frontend
+      - run: python -m unittest discover -s app/backend -p 'test_*.py' -v
+      - run: node infrastructure/build-template.mjs --check
+      - run: pip install -r infrastructure/requirements-validation.txt
+      - run: cfn-lint infrastructure/template.json

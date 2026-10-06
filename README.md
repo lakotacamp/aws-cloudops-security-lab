@@ -1,77 +1,95 @@
-# AWS CloudOps Security Lab
+# Hearthfall
 
-Employer-facing AWS cloud operations and security portfolio repository focused on monitoring, IAM, logging, EC2 troubleshooting, incident response runbooks, and technical documentation.
+### A small world. A real systems story.
 
-## Purpose
+**Colony Simulator Ops Showcase** by Lakota Camp. A playable frontier settlement paired with an inspectable AWS operations environment.
 
-This repository documents my hands-on training and project work as I transition from mission-critical surgical technology support into AWS cloud operations and cybersecurity.
+Keep 18 settlers alive until day 30. Choose a priority, advance a day, and see deterministic resource changes and a readable journal. Open Operations to probe a service, introduce a request-scoped failure, and verify recovery.
 
-The current focus is building clear, professional artifacts that demonstrate operational thinking, troubleshooting process, security fundamentals, and documentation quality.
+![Hearthfall browser edition](docs/screenshots/hearthfall-desktop.jpg)
 
-## Skills Demonstrated
+[Mobile view](docs/screenshots/hearthfall-mobile.jpg). Screenshots show the browser edition, not live AWS telemetry.
 
-- AWS cloud operations fundamentals
-- EC2 troubleshooting
-- CloudWatch monitoring and alarms
-- CloudTrail logging and audit concepts
-- IAM roles, policies, and least privilege
-- Incident response runbooks
-- Technical documentation
-- Security-focused operational thinking
+## What is implemented
 
-## Current Status
+- **Playable simulation:** four priorities, predictable weather, bounded resources, recoverable risk, and a defined win/loss condition.
+- **Browser persistence:** a versioned, validated local save and JSON journal export. Colony data stays in the visitor's browser.
+- **Operations console:** actual current-session probe results, request IDs, client-observed latency, and a controlled failure/recovery flow. Browser-only responses are explicitly labeled.
+- **Python API:** stateless health and diagnostic endpoints, structured logs, request validation, and diagnostics disabled by default.
+- **AWS infrastructure as code:** private S3, CloudFront origin access control, API Gateway HTTP API, Lambda, CloudWatch logs, a dashboard, and a 5xx alarm.
+- **Validation:** simulation and persistence tests, backend tests, lint/build checks, and CloudFormation schema validation in GitHub Actions.
 
-In progress. Current artifacts are being developed and polished into employer-facing documentation.
+**Deployment status:** the AWS template is implemented and locally validated. A deployed AWS environment and live alarm transitions have not yet been verified. A template, a browser demonstration, and production evidence are distinct things.
+
+## Try it locally
+
+Use Node.js 24 and Python 3.13 (backend tests also run on 3.12).
+
+```sh
+cd app/frontend
+npm ci
+npm run dev
+```
+
+Open the address printed by Vite. No AWS account or credentials are needed for browser mode. Select **Operations → Check service → Trigger diagnostic failure → Verify recovery** to explore the demonstration.
 
 ## Architecture
 
-- [AWS CloudOps Security Lab Architecture Diagram v1](docs/architecture/diagrams/aws-cloudops-security-lab-v1.md)
-- [Colony Simulator VPC Architecture Outline](docs/architecture/diagrams/colony-simulator-vpc-architecture-outline.md)
+```mermaid
+flowchart LR
+    Browser[Browser: simulation + local save] --> Edge[CloudFront / HTTPS]
+    Edge -->|Static files / signed origin requests| Bucket[Private S3]
+    Edge -->|/api/* / no caching| API[API Gateway HTTP API]
+    API --> Function[Lambda / Python]
+    API --> Logs[CloudWatch logs and metrics]
+    Function --> Logs
+    Logs --> Alarm[API 5xx alarm + dashboard]
+```
 
-## Project Documentation
+The API demonstrates an operational request path; it does **not** execute turns or store colony saves. This boundary keeps the application useful when the diagnostic service is unavailable and avoids account management or a database for this scope.
 
-- [Project Vision](docs/project/project-vision.md)
-- [MVP Roadmap](docs/project/mvp-roadmap.md)
-- [MVP Architecture](docs/project/mvp-architecture.md)
-- [Frontend App README](app/frontend/README.md)
-- [VPC Network Segmentation Decision Record](docs/architecture/decisions/adr-001-vpc-network-segmentation.md)
-- [CloudOps Master Map](docs/cloudops-master-map.md)
-- [AWS Lab Template](docs/operations/templates/aws-lab-template.md)
-- [Runbook Template](docs/operations/templates/runbook-template.md)
-- [Frontend Static Site Deployment Plan](docs/deployment/frontend-static-site-deployment.md)
+### Decisions worth inspecting
 
-### MVP Foundation
+| Decision | Reason and tradeoff |
+| --- | --- |
+| Deterministic TypeScript simulation | Reproducible turns; no model-generated state or runtime AI dependency. |
+| Browser-local persistence | No account or server-side personal data; saves do not follow visitors between devices. |
+| Private S3 + CloudFront OAC | Public HTTPS delivery without a public bucket; distribution-scoped origin permission. |
+| Narrow public, stateless API | No secrets or colony data exposed; anonymous traffic can still incur charges. |
+| Intentional HTTP 503 | Produces a real request failure without affecting other requests; alarm on API 5xx, because Lambda can return 503 successfully. |
+| Native metrics and seven-day logs | Enough evidence for a small incident exercise; no private telemetry published to visitors. |
 
-- [x] Create first architecture diagram
-- [x] Create public project vision document
-- [x] Reorganize documentation structure for the Colony Simulator Ops Showcase
-- [x] Define MVP roadmap
-- [x] Create MVP architecture document
-- [x] Create first deployable frontend shell
+See the [current architecture and security boundaries](docs/architecture/hearthfall.md), [deployment/cost/cleanup guide](docs/deployment/aws-deployment.md), and [diagnostic incident runbook](docs/operations/runbooks/diagnostic-failure.md).
 
-### Application Build
+## Validation
 
-- [x] Build initial colony landing page
-- [x] Add seeded colony state view
-- [x] Add basic “Advance Day” interaction
-- [x] Add placeholder or generated journal entry update
-- [x] Add basic Ops Dashboard page
+```sh
+cd app/frontend
+npm test
+npm run lint
+npm run build
+cd ../..
+python -m unittest discover -s app/backend -p 'test_*.py' -v
+node infrastructure/build-template.mjs --check
+pip install -r infrastructure/requirements-validation.txt
+cfn-lint infrastructure/template.json
+```
 
-### CloudOps / Security Capabilities
+Tests cover state immutability, resource boundaries and actual deltas, weather, risk recovery, a complete expedition, save validation, and API healthy → diagnostic 503 → healthy behavior. They do not prove deployed IAM permissions, edge routing, metrics delivery, or alarm transitions; verify those with the deployment checklist.
 
-- [ ] Add first CloudWatch monitoring capability
-- [ ] Add CloudTrail audit documentation
-- [ ] Add IAM least-privilege decision record
-- [ ] Add incident response runbook
-- [ ] Add safe incident simulation design
-- [ ] Add screenshots and operational evidence
+## Repository map
 
-## Runbooks
+- `app/frontend/src/simulation` — authoritative turn rules.
+- `app/frontend/src/lib` — validated browser persistence and probe client.
+- `app/frontend/src/components` — settlement map, operations console, architecture explorer.
+- `app/backend` — Lambda handler and unit tests; standard library only.
+- `infrastructure` — template generator, generated CloudFormation, release helpers.
+- `docs` — architecture decisions, deployment guide, and runbooks.
 
-- [EC2 SSH Troubleshooting Runbook](docs/operations/runbooks/ec2-ssh-troubleshooting.md)
+Older VPC/EC2 diagrams, the original roadmap, and the previous static deployment plan are historical planning artifacts. They are **not** the deployed or current application architecture. This release does not implement EC2, a VPC, DynamoDB, Bedrock, CloudTrail trails, SNS, WAF, or user authentication.
 
-## Screenshots
-Coming soon.
+## Scope and contribution
 
-## Lessons Learned
-Coming soon.
+This is an AI-assisted portfolio project. Product requirements and direction came from Lakota Camp; Codex assisted with implementation, tests, and documentation. This repository records the implementation and its verification without claiming unaided authorship or unverified production operation.
+
+Known limits: no cloud save or multiplayer; browser storage is editable by its owner; no uptime SLO; no automatic remediation or notifications; rate limits are best effort rather than a billing cap. Medicine is tracked as a consumable but does not independently end an expedition.

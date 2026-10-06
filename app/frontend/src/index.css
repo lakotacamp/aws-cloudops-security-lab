@@ -1,71 +1,114 @@
 :root {
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #f4efe4;
-  background: #10151d;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #eeeade;
+  background: #101a16;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --bg: #101a16;
+  --panel: #16231d;
+  --panel-light: #1b2b23;
+  --line: #314136;
+  --muted: #a5b2a5;
+  --gold: #dfbe7f;
+  --green: #9dc4a1;
 }
-
 * {
   box-sizing: border-box;
 }
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
 }
-
 button,
 input,
-textarea,
 select {
   font: inherit;
 }
-
-.turn-outcome-card {
-  margin: 0 0 1.25rem;
-  padding: 1.25rem;
-  border: 1px solid rgba(216, 180, 106, 0.24);
-  border-radius: 20px;
-  background: rgba(216, 180, 106, 0.08);
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
-
-.turn-outcome-card h3 {
-  margin-top: 0;
-  color: #f4efe4;
+button {
+  cursor: pointer;
 }
-
-.turn-outcome-card p {
-  color: #d8d1c4;
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+button {
+  color: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+p {
   line-height: 1.7;
 }
-
-.outcome-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-top: 1rem;
+button,
+a {
+  touch-action: manipulation;
 }
-
-.outcome-grid span {
-  padding: 0.75rem;
-  border-radius: 14px;
-  background: rgba(244, 239, 228, 0.08);
-  color: #f4efe4;
-  font-weight: 700;
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 5px;
 }
-
-@media (max-width: 900px) {
-  .outcome-grid {
-    grid-template-columns: 1fr;
+::selection {
+  background: #78895b;
+  color: white;
+}
+[hidden] {
+  display: none !important;
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+h2,
+h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+h4 {
+  font-size: 0.84rem;
+}
+small {
+  font-size: 0.75rem;
+}
+button {
+  border: 0;
+}
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  background: var(--gold);
+  color: var(--bg);
+  padding: 15px;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 12px;
+}
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
